@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E5E7E3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121618" media="(prefers-color-scheme: dark)">
+<meta name="description" content="KVLR 1490 — The Last of Us TTRPG session kit.">
+<title>KVLR 1490</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#E5E7E3; --surface:#F4F4F2; --sunk:#DBDDD8; --rule:#C4C7C1; --rule2:#9EA4A0;
+  --ink:#171A1C; --ink2:#4C5457; --ink3:#787F83;
+  --amber:#A85D0A; --amber-soft:#F2E3C9; --amber-line:#D89B33;
+  --rust:#95311F; --rust-soft:#F2DCD6;
+  --signal:#265F75; --signal-soft:#D8E6EC;
+  --node:#FBFBFA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+    --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+    --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+    --rust:#D4735D; --rust-soft:#301B17;
+    --signal:#6FB4CD; --signal-soft:#152730;
+    --node:#1E2427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+  --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+  --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+  --rust:#D4735D; --rust-soft:#301B17;
+  --signal:#6FB4CD; --signal-soft:#152730;
+  --node:#1E2427;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink); margin:0;
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.52; -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1220px; margin:0 auto; padding:40px 28px 80px}
+
+/* ---------- masthead ---------- */
+.mast{border-top:6px solid var(--ink); padding-top:16px; margin-bottom:10px}
+.callsign{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:6px;
+}
+.mast h1{
+  font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:800;
+  font-size:clamp(46px,8.5vw,104px); line-height:.84; letter-spacing:.005em;
+  text-transform:uppercase; margin:0 0 14px; text-wrap:balance;
+}
+.mast h1 em{font-style:normal; color:var(--amber)}
+.standfirst{font-size:17.5px; color:var(--ink2); max-width:62ch; margin:0 0 20px}
+.standfirst b{color:var(--ink); font-weight:600}
+.stripbar{
+  display:flex; flex-wrap:wrap; gap:0; border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule); margin-bottom:38px;
+}
+.stripbar div{
+  padding:12px 22px 12px 0; margin-right:22px; border-right:1px solid var(--rule);
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink3);
+}
+.stripbar div:last-child{border-right:none; margin-right:0}
+.stripbar b{display:block; color:var(--ink); font-size:13px; letter-spacing:.04em; margin-top:3px; font-weight:600}
+
+h2{
+  font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:700;
+  font-size:32px; line-height:1; letter-spacing:.02em; text-transform:uppercase;
+  margin:0 0 16px; padding-bottom:8px; border-bottom:2px solid var(--ink);
+  display:flex; align-items:baseline; gap:14px;
+}
+h2 span{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+  letter-spacing:.12em; color:var(--amber); margin-left:auto; white-space:nowrap;
+}
+p{margin:0 0 11px; max-width:68ch}
+section{margin-bottom:46px}
+.dim{color:var(--ink2)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ---------- cold open ---------- */
+.coldopen{
+  background:var(--sunk); border-left:6px solid var(--amber-line);
+  padding:26px 30px; margin-bottom:44px;
+}
+.coldopen h3{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--amber); margin:0 0 14px; font-weight:600;
+}
+.readaloud{
+  font-size:18px; line-height:1.62; color:var(--ink); max-width:60ch;
+  border-left:2px solid var(--rule2); padding-left:20px;
+}
+.readaloud p{margin:0 0 14px; max-width:none}
+.readaloud p:last-child{margin-bottom:0}
+.readaloud .beat{font-family:"Big Shoulders Display",sans-serif; font-size:27px;
+  font-weight:700; text-transform:uppercase; letter-spacing:.02em; color:var(--rust); line-height:1.05}
+
+/* ---------- figure ---------- */
+.figwrap{overflow-x:auto; background:var(--surface); border:1px solid var(--rule); padding:26px 22px}
+figure{margin:0}
+figure svg{display:block; width:100%; min-width:820px; height:auto}
+figcaption{font-size:13.5px; color:var(--ink2); margin-top:14px; max-width:74ch}
+.legend{display:flex; flex-wrap:wrap; gap:16px 26px; margin:16px 0 0;
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink2)}
+.legend i{display:inline-block; width:11px; height:11px; margin-right:7px;
+  vertical-align:-1px; font-style:normal}
+
+/* ---------- node cards ---------- */
+.nodes{display:grid; gap:20px}
+.node{background:var(--surface); border:1px solid var(--rule); border-top:4px solid var(--rule2)}
+.node.t-combat{border-top-color:var(--rust)}
+.node.t-stealth{border-top-color:var(--signal)}
+.node.t-puzzle{border-top-color:var(--amber-line)}
+.node.t-social{border-top-color:var(--signal)}
+.node.t-set{border-top-color:var(--amber-line)}
+.node-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:14px;
+  padding:16px 22px 12px; border-bottom:1px solid var(--rule)}
+.node-num{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+  color:var(--amber); letter-spacing:.06em}
+.node-head h3{font-family:"Big Shoulders Display",sans-serif; font-size:30px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.02em; margin:0; line-height:1}
+.node-tag{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:600; margin-left:auto; padding:4px 9px; white-space:nowrap}
+.t-combat .node-tag{background:var(--rust-soft); color:var(--rust)}
+.t-stealth .node-tag,.t-social .node-tag{background:var(--signal-soft); color:var(--signal)}
+.t-puzzle .node-tag,.t-set .node-tag{background:var(--amber-soft); color:var(--amber)}
+.node-body{padding:18px 22px 20px; display:grid; gap:18px;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+@media (max-width:760px){.node-body{grid-template-columns:1fr}}
+.node-body h4{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink2); margin:0 0 8px; font-weight:600}
+.node-body p{font-size:14.5px; max-width:60ch}
+.node-body p:last-child{margin-bottom:0}
+.whats{list-style:none; margin:0; padding:0; font-size:14px}
+.whats li{padding:7px 0 7px 0; border-bottom:1px solid var(--rule); color:var(--ink2)}
+.whats li:last-child{border-bottom:none}
+.whats b{color:var(--ink); font-weight:600}
+
+/* branch options */
+.branches{list-style:none; margin:0; padding:0; display:grid; gap:9px}
+.branch{display:grid; grid-template-columns:auto 1fr; gap:13px; align-items:start;
+  background:var(--bg); border:1px solid var(--rule); padding:11px 14px; font-size:14px}
+.branch .key{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+  letter-spacing:.05em; color:var(--signal); white-space:nowrap; padding-top:1px}
+.branch .key.loud{color:var(--rust)}
+.branch .key.obj{color:var(--amber)}
+.branch b{font-weight:600}
+.branch .cost{display:block; color:var(--ink3); font-size:12.5px;
+  font-family:"IBM Plex Mono",monospace; margin-top:3px}
+
+.gmnote{background:var(--amber-soft); border-left:4px solid var(--amber-line);
+  padding:12px 16px; font-size:13.5px; color:var(--ink); margin-top:4px}
+.gmnote b{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--amber); display:block; margin-bottom:4px}
+.gmnote p{max-width:none; margin:0}
+
+/* ---------- stat table ---------- */
+.stats{width:100%; border-collapse:collapse; font-size:13.5px;
+  font-variant-numeric:tabular-nums}
+.stats th{text-align:left; font-family:"IBM Plex Mono",monospace; font-size:10px;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink2); font-weight:600;
+  padding:0 14px 8px 0; border-bottom:2px solid var(--ink); white-space:nowrap}
+.stats td{padding:9px 14px 9px 0; border-bottom:1px solid var(--rule); white-space:nowrap}
+.stats td:first-child{font-weight:600; white-space:normal}
+.stats td:last-child{white-space:normal; color:var(--ink2); font-size:13px}
+.stats .num{font-family:"IBM Plex Mono",monospace}
+.stats tbody tr.grp td{background:var(--sunk); font-family:"IBM Plex Mono",monospace;
+  font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink2);
+  font-weight:600; padding:7px 14px 7px 8px}
+.tablewrap{overflow-x:auto}
+
+/* ---------- pacing ---------- */
+.pacing{display:grid; gap:0; border:1px solid var(--rule)}
+.pace{display:grid; grid-template-columns:106px 1fr; gap:0; border-bottom:1px solid var(--rule)}
+.pace:last-child{border-bottom:none}
+.pace .clock{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+  padding:15px 16px; background:var(--sunk); color:var(--amber); border-right:1px solid var(--rule)}
+.pace .what{padding:15px 20px}
+.pace .what b{display:block; font-family:"Big Shoulders Display",sans-serif; font-size:21px;
+  font-weight:700; text-transform:uppercase; letter-spacing:.02em; margin-bottom:4px}
+.pace .what span{font-size:14px; color:var(--ink2)}
+
+/* ---------- checklist ---------- */
+.check{columns:2; column-gap:34px; list-style:none; margin:0; padding:0; font-size:14.5px}
+@media (max-width:680px){.check{columns:1}}
+.check li{break-inside:avoid; padding:8px 0 8px 28px; position:relative; color:var(--ink2)}
+.check li::before{content:""; position:absolute; left:0; top:12px; width:14px; height:14px;
+  border:1.5px solid var(--rule2)}
+.check li b{color:var(--ink); font-weight:600}
+
+footer{border-top:1px solid var(--rule); margin-top:52px; padding-top:18px;
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em;
+  color:var(--ink3); text-transform:uppercase}
+
+/* --- site nav (added for tablet use) --- */
+.sitenav{position:sticky; top:0; z-index:50; display:flex; flex-wrap:wrap; gap:0;
+  background:var(--sunk); border-bottom:1px solid var(--rule2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px;
+  letter-spacing:.13em; text-transform:uppercase;
+  -webkit-backdrop-filter:saturate(180%) blur(6px); backdrop-filter:saturate(180%) blur(6px)}
+.sitenav a{display:block; padding:13px 18px; color:var(--ink2); text-decoration:none;
+  border-right:1px solid var(--rule); min-height:44px; line-height:20px}
+.sitenav a:hover{color:var(--ink); background:var(--surface)}
+.sitenav a:focus-visible{outline:2px solid var(--amber); outline-offset:-2px}
+.sitenav a[aria-current="page"]{color:var(--amber); font-weight:600; background:var(--bg);
+  box-shadow:inset 0 -3px 0 var(--amber)}
+@media print{
+  .sitenav{display:none}
+  figure svg{min-width:0 !important}
+  .figwrap{overflow:visible; border:none; padding:0}
+  .sesh,.node,.pace,.act,.trow,.mod,.fcard,.link,.branch,.crits,.teach>div,.loop>div{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  a{text-decoration:none; color:inherit}
+}
+</style>
+</head>
+<body>
+<nav class="sitenav" aria-label="Session kit">
+<a href="index.html">Kit</a>
+<a href="combat.html">Combat</a>
+<a href="session-01.html" aria-current="page">Session 01</a>
+<a href="act-one.html">Act One</a>
+</nav>
+<div class="page">
+
+<header class="mast">
+  <div class="callsign">Session One &middot; Look for the Light &middot; Ashline Territory</div>
+  <h1>KVLR<br><em>1490 AM</em></h1>
+  <p class="standfirst">A Firefly courier named <b>Wren</b> gave you a frequency, a hand-drawn schematic and a promise that someone is still listening. The tower on Ludlow Ridge has been dark for eleven years. <b>You are going to turn it back on.</b></p>
+</header>
+
+<div class="stripbar">
+  <div>Players<b>5 &middot; Novice Survivor</b></div>
+  <div>Runtime<b>2.5 hours</b></div>
+  <div>Rules<b>Standard &mdash; no Trauma, no Grounded</b></div>
+  <div>Travel mode<b>Linear</b></div>
+  <div>Objective<b>Power the transmitter, make contact</b></div>
+</div>
+
+<div class="coldopen">
+  <h3>Cold open &mdash; read this, then ask the question</h3>
+  <div class="readaloud">
+    <p>The padlock closes with a sound like a dropped wrench, and for exactly four seconds you let yourselves believe that was the hard part.</p>
+    <p>Behind you, on the far side of the chain-link, the ones that followed you up the ridge road are already pressing their faces into the fence. Good. Let them.</p>
+    <p>Ahead of you is the parking lot of KVLR — forty years of dead cars sunk to their axles in weeds, a snapped radio mast lying across two of them, and a low brick building with an antenna tower rising out of it into the grey.</p>
+    <p>And in the lot, between you and that building, six shapes that were not there when you scouted this from the road. One of them lifts its head. The sound it makes is not quite a word.</p>
+    <p class="beat">You just locked yourselves in with them. Nobody is opening that gate again. What do you do?</p>
+  </div>
+</div>
+
+<section>
+  <h2>The session map <span>10 scenes &middot; 3 ways in</span></h2>
+
+  <div class="figwrap">
+  <figure>
+    <svg viewBox="0 0 1100 1520" role="img" aria-label="Branching scene map of the KVLR radio station session. The party starts locked in the parking lot and chooses one of three entrances: the front lobby which is loud, the loading dock which is guarded by a Clicker, or the fire escape to the roof. The lobby leads to the bullpen. The loading dock leads to the bullpen or up to the second floor offices. The roof leads to the offices or directly along the cable run to the transmitter room. The offices lead down to the bullpen or drop onto the broadcast booth. The bullpen leads to the booth, the booth to the transmitter room, then to the broadcast, then to the escape. A dashed line runs from the parking lot down to the broadcast, showing that powering the transmitter draws every infected still alive in the lot.">
+      <defs>
+        <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--rule2,#9EA4A0)"></path>
+        </marker>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--rust,#95311F)"></path>
+        </marker>
+      </defs>
+
+      <!-- ===== edges (drawn first, under nodes) ===== -->
+      <g fill="none" stroke="var(--rule2,#9EA4A0)" stroke-width="1.8" marker-end="url(#a)">
+        <path d="M540,136 V196 H180 V250"></path>
+        <path d="M540,136 V250"></path>
+        <path d="M540,136 V196 H900 V250"></path>
+        <path d="M180,344 V700 H404"></path>
+        <path d="M540,344 V650"></path>
+        <path d="M670,300 H722 V500 H764"></path>
+        <path d="M900,344 V450"></path>
+        <path d="M840,544 V700 H676"></path>
+        <path d="M960,544 V880 H676"></path>
+        <path d="M540,744 V830"></path>
+        <path d="M540,924 V1010"></path>
+        <path d="M540,1104 V1190"></path>
+        <path d="M540,1284 V1370"></path>
+      </g>
+      <path d="M1030,300 H1066 V1060 H676" fill="none" stroke="var(--rule2,#9EA4A0)"
+            stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#a)"></path>
+
+      <!-- consequence loop -->
+      <path d="M410,92 H24 V1240 H404" fill="none" stroke="var(--rust,#95311F)"
+            stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#ar)"></path>
+
+      <!-- ===== edge labels ===== -->
+      <g font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">
+        <text x="296" y="186" text-anchor="middle" fill="var(--rust,#95311F)" font-weight="600">LOUD &middot; smash the chain</text>
+        <text x="550" y="216" text-anchor="start">quiet &middot; the dock ramp</text>
+        <text x="788" y="186" text-anchor="middle">climb &middot; fire escape</text>
+        <text x="190" y="520" text-anchor="start">they heard you coming</text>
+        <text x="550" y="500" text-anchor="start">straight in</text>
+        <text x="730" y="404" text-anchor="start">back stair</text>
+        <text x="908" y="404" text-anchor="start">roof hatch</text>
+        <text x="1058" y="352" text-anchor="end">the cable run</text>
+        <text x="760" y="690" text-anchor="middle">down the rear stair</text>
+        <text x="968" y="800" text-anchor="start">drop on the booth</text>
+        <text x="36" y="1226" text-anchor="start" fill="var(--rust,#95311F)" font-weight="600">the noise brings back everything you left alive</text>
+      </g>
+
+      <!-- ===== nodes ===== -->
+      <!-- 1 -->
+      <g>
+        <rect x="410" y="48" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="410" y="48" width="5" height="88" fill="var(--amber-line,#D89B33)"></rect>
+        <text x="428" y="76" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">01</text>
+        <text x="428" y="104" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE LOT</text>
+        <text x="428" y="124" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--amber,#A85D0A)">SET PIECE &middot; 5 RUNNERS + 1 CLICKER</text>
+      </g>
+      <!-- 2 -->
+      <g>
+        <rect x="50" y="256" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="50" y="256" width="5" height="88" fill="var(--rust,#95311F)"></rect>
+        <text x="68" y="284" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">02</text>
+        <text x="68" y="312" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE LOBBY</text>
+        <text x="68" y="332" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--rust,#95311F)">COMBAT &middot; 2 ASHLINE, ALERTED</text>
+      </g>
+      <!-- 3 -->
+      <g>
+        <rect x="410" y="256" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="410" y="256" width="5" height="88" fill="var(--signal,#265F75)"></rect>
+        <text x="428" y="284" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">03</text>
+        <text x="428" y="312" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">LOADING BAY</text>
+        <text x="428" y="332" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--signal,#265F75)">STEALTH &middot; THE FUEL IS HERE</text>
+      </g>
+      <!-- 4 -->
+      <g>
+        <rect x="770" y="256" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="770" y="256" width="5" height="88" fill="var(--amber-line,#D89B33)"></rect>
+        <text x="788" y="284" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">04</text>
+        <text x="788" y="312" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE ROOF</text>
+        <text x="788" y="332" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--amber,#A85D0A)">PUZZLE &middot; ANTENNA + A DEAD FIREFLY</text>
+      </g>
+      <!-- 5 -->
+      <g>
+        <rect x="770" y="456" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="770" y="456" width="5" height="88" fill="var(--signal,#265F75)"></rect>
+        <text x="788" y="484" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">05</text>
+        <text x="788" y="512" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE OFFICES</text>
+        <text x="788" y="532" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--signal,#265F75)">STEALTH &middot; SCOUT THE CAMP BELOW</text>
+      </g>
+      <!-- 6 -->
+      <g>
+        <rect x="410" y="656" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="410" y="656" width="5" height="88" fill="var(--rust,#95311F)"></rect>
+        <text x="428" y="684" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">06</text>
+        <text x="428" y="712" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE BULLPEN</text>
+        <text x="428" y="732" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--rust,#95311F)">CONVERGE &middot; 2 ASHLINE + THE LEDGER</text>
+      </g>
+      <!-- 7 -->
+      <g>
+        <rect x="410" y="836" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="410" y="836" width="5" height="88" fill="var(--signal,#265F75)"></rect>
+        <text x="428" y="864" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">07</text>
+        <text x="428" y="892" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE BOOTH</text>
+        <text x="428" y="912" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--signal,#265F75)">SOCIAL &middot; BOONE HAS THE KEY</text>
+      </g>
+      <!-- 8 -->
+      <g>
+        <rect x="410" y="1016" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="410" y="1016" width="5" height="88" fill="var(--amber-line,#D89B33)"></rect>
+        <text x="428" y="1044" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">08</text>
+        <text x="428" y="1072" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">TRANSMITTER</text>
+        <text x="428" y="1092" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--amber,#A85D0A)">PUZZLE &middot; FUEL + KEY + CABLE</text>
+      </g>
+      <!-- 9 -->
+      <g>
+        <rect x="410" y="1196" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rust,#95311F)" stroke-width="2.5"></rect>
+        <rect x="410" y="1196" width="5" height="88" fill="var(--rust,#95311F)"></rect>
+        <text x="428" y="1224" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">09</text>
+        <text x="428" y="1252" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE BROADCAST</text>
+        <text x="428" y="1272" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--rust,#95311F)">SET PIECE &middot; 4 ROUNDS ON AIR</text>
+      </g>
+      <!-- 10 -->
+      <g>
+        <rect x="410" y="1376" width="260" height="88" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="410" y="1376" width="5" height="88" fill="var(--rust,#95311F)"></rect>
+        <text x="428" y="1404" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--amber,#A85D0A)">10</text>
+        <text x="428" y="1432" font-family="Big Shoulders Display, sans-serif" font-size="27" font-weight="700" fill="var(--ink,#171A1C)">THE WAY OUT</text>
+        <text x="428" y="1452" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="var(--rust,#95311F)">CHASE &middot; THE GATE IS STILL LOCKED</text>
+      </g>
+    </svg>
+    <figcaption>Three entrances funnel into one camp, and the objective is deliberately split across three rooms — fuel in the loading bay, the transmitter key on Boone, the antenna cable on the roof — so no single route skips the building. Solid lines are ways forward; dashed lines are the shortcuts and the consequence.</figcaption>
+  </figure>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--rust)"></i>Combat / danger</span>
+    <span><i style="background:var(--signal)"></i>Stealth / social</span>
+    <span><i style="background:var(--amber-line)"></i>Puzzle / set piece</span>
+    <span><i style="background:var(--rule2)"></i>Solid edge — route forward</span>
+    <span><i style="background:transparent;border:1px dashed var(--rule2)"></i>Dashed — shortcut or consequence</span>
+  </div>
+</section>
+
+<section>
+  <h2>The scenes <span>Read-aloud, branches, DCs</span></h2>
+  <div class="nodes">
+
+  <!-- 01 -->
+  <article class="node t-set">
+    <div class="node-head"><span class="node-num">01</span><h3>The Lot</h3><span class="node-tag">Set piece &middot; forced</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>Seventy metres of collapsed parking lot between the gate and the building. Cars sunk in weeds give cover and sightline breaks the whole way across; the fallen mast makes a raised walkway most of the distance if anyone thinks to climb it.</p>
+        <p><strong>Five Runners</strong> scattered and idle among the vehicles. <strong>One Clicker</strong> stands at the loading dock ramp, which is exactly where the quiet route is. It has not moved in a long time.</p>
+        <div class="gmnote"><b>Why this opening works</b><p>Every player learns the three core verbs in ten minutes: sneak, grapple, run. Nobody has to be told combat is dangerous — a Runner does 3D8 against 25 Health, and they'll feel that on the first hit.</p></div>
+      </div>
+      <div>
+        <h4>Branches out</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key loud">LOUD</span><span><b>The front doors → 02.</b> Glass, chained from inside. Brutality <span class="mono">DC 8</span> to break the chain.<span class="cost">Every Runner in the lot converges. The Ashline inside start Alert.</span></span></li>
+          <li class="branch"><span class="key">QUIET</span><span><b>The dock ramp → 03.</b> The roll-up door sits a foot off the ground. Getting there means handling the Clicker: sneak past <span class="mono">Sneak DC 10</span>, or shiv it (auto-kill on a passed sneak).<span class="cost">Fails here go straight to combat — Clickers skip Alert.</span></span></li>
+          <li class="branch"><span class="key">CLIMB</span><span><b>The fire escape → 04.</b> Bottom ladder is retracted. Elusive <span class="mono">DC 9</span>, or a <b>Boost</b> — one PC rolls Brutality, the climber rolls Elusive, combined vs <span class="mono">DC 12</span>.<span class="cost">Slow. Whoever goes last is alone in the lot for a round.</span></span></li>
+          <li class="branch"><span class="key obj">FIND</span><span><b>Scavenging <span class="mono">DC 7</span></b> in the lot: a siphon hose in a truck bed, 1D10 Parts, a bolt cutter under the mast (opens the chain silently — reward the player who searches before charging).</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="node t-combat">
+    <div class="node-head"><span class="node-num">02</span><h3>The Lobby</h3><span class="node-tag">Combat</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>A reception desk, a wall of dead station photographs, and a smear of grey ash drawn across the doorframe at shoulder height — deliberate, recent, and repeated on every interior door in the building.</p>
+        <p><strong>Instinct DC 7</strong> reads it correctly: this is a territory mark, and someone is maintaining it. That is the party's first warning that the station is <em>occupied</em>, not just standing.</p>
+        <div class="gmnote"><b>If they came in loud</b><p>Two Ashline are already waiting behind the desk with the lobby as their cover. Give them Semi-Cover and let the party learn that cover only helps against guns.</p></div>
+      </div>
+      <div>
+        <h4>What's here</h4>
+        <ul class="whats">
+          <li><b>Ashline Thug</b> — 2x4, 1D8, 12 HP, Hit DC 5, Counter DC 6</li>
+          <li><b>Ashline Ruffian</b> — bat, 1D10, 15 HP, Hit DC 6, Counter DC 6</li>
+          <li><b>Visitor lanyard drawer</b> — Scavenging DC 7. A staff keycard: opens the second-floor stair door without noise.</li>
+          <li><b>Goods theme loot</b> — one roll, Scavenging DC 7</li>
+        </ul>
+        <h4 style="margin-top:16px">Branches out</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key">→ 06</span><span>The corridor to the bullpen. Only exit — the lobby is a dead end by design, which is the price of the loud entrance.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="node t-stealth">
+    <div class="node-head"><span class="node-num">03</span><h3>The Loading Bay</h3><span class="node-tag">Stealth &middot; objective item</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>The Ashline larder. Crates stacked by type, hand-lettered: <span class="mono">BRASS · GLASS · MEAT · SALT</span>. One man, alone, counting shells into a coffee tin by lamplight with his back to the door.</p>
+        <p>This is the single best stealth-kill setup in the session, and it is also the session's first moral question: he is unarmed, he is doing inventory, and he has no idea they exist.</p>
+        <div class="gmnote"><b>The twist, planted here</b><p>The coffee tin is full of ammunition and the man has no gun. The Ashline <em>trade</em> brass — it's their currency, so they don't spend it on themselves. That is why every enemy in this building carries a bat instead of a rifle. Let a player work it out rather than telling them.</p></div>
+      </div>
+      <div>
+        <h4>What's here</h4>
+        <ul class="whats">
+          <li><b>Ashline Crew</b> — pistol holstered and unloaded, 18 HP, Sneak DC 6. Stealth kill: pass Sneak DC 6, then Brutality vs Hit DC 7. A shiv skips the second roll.</li>
+          <li><b>Three jerry cans</b> — two full, one empty. <b>The generator needs two.</b> This is objective item 1 of 3.</li>
+          <li><b>Utility theme loot</b> — 10–25 Parts, adhesive, blades</li>
+          <li><b>The trade ledger's duplicate</b> — Scavenging DC 9. Names a FEDRA patrol as a trading partner.</li>
+        </ul>
+        <h4 style="margin-top:16px">Branches out</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key">→ 06</span><span>Through the service corridor into the bullpen — arrives at the camp's flank.</span></li>
+          <li class="branch"><span class="key">→ 05</span><span>The rear stair up to the offices. Elusive DC 6 to climb quietly; the treads are steel.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="node t-puzzle">
+    <div class="node-head"><span class="node-num">04</span><h3>The Roof</h3><span class="node-tag">Puzzle &middot; objective item</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>Gravel, standing water, and the tower going up into low cloud. The antenna feed cable has been cut about three metres up and the copper stripped out of it — recently, and not by weather.</p>
+        <p>Face-down beside the tower base is a man in a Firefly windbreaker, eleven months dead, a coil of good cable still clipped to his belt. <strong>This is the last person Wren sent.</strong> She did not mention him.</p>
+        <div class="gmnote"><b>His notebook</b><p>Water-damaged, mostly frequencies. The last legible line is the transmitter room door code — <span class="mono">4-9-1-1</span> — and underneath it, in different ink: <em>"they let me get this far."</em> The party can now open the transmitter room without ever meeting Boone.</p></div>
+      </div>
+      <div>
+        <h4>What's here</h4>
+        <ul class="whats">
+          <li><b>Objective item 2 of 3</b> — the cable coil. Maintenance <span class="mono">DC 9</span> to splice the antenna feed, with adhesive and blades. Without them, DC 12.</li>
+          <li><b>The door code</b> — bypasses Boone's key entirely</li>
+          <li><b>Sightline</b> — the whole lot below. A player who looks can count the Runners and see the gate.</li>
+          <li><b>No enemies.</b> Let the roof be quiet. They will need one quiet scene.</li>
+        </ul>
+        <h4 style="margin-top:16px">Branches out</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key">→ 05</span><span>The roof hatch down into the second floor. Unlocked, loud hinges — Elusive DC 7 or the offices know they're coming.</span></li>
+          <li class="branch"><span class="key obj">→ 08</span><span><b>The cable run.</b> An external conduit ladder descends the back wall straight into the transmitter loft. Elusive <span class="mono">DC 10</span>, exposed the whole way. <span class="cost">Skips 05, 06 and 07 — but they arrive with no fuel and no key.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="node t-stealth">
+    <div class="node-head"><span class="node-num">05</span><h3>The Offices</h3><span class="node-tag">Stealth &middot; recon</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>Sales cubicles, a break room, a wall of station-anniversary plaques. Ash lines on three of the six doors — the Ashline haven't cleared this floor, they've simply marked what they use.</p>
+        <p>The interior window overlooking the newsroom is broken out. From here the party can <strong>watch the camp below for as long as they like</strong> — count the men, hear the conversation, learn Boone's name before they ever meet him. Reward patience with information.</p>
+      </div>
+      <div>
+        <h4>What's here</h4>
+        <ul class="whats">
+          <li><b>Spool of speaker wire</b> — an inferior substitute for the roof cable. Maintenance DC 12 instead of DC 9.</li>
+          <li><b>A working flashlight</b> and 1D6 batteries — Scavenging DC 7</li>
+          <li><b>Crafting theme loot</b> — one roll</li>
+          <li><b>Overheard from below</b> — Boone arguing with his own people about whether to move the post before winter. He is losing the argument.</li>
+        </ul>
+        <h4 style="margin-top:16px">Branches out</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key">→ 06</span><span>The rear stair down into the bullpen, arriving behind the camp.</span></li>
+          <li class="branch"><span class="key loud">→ 07</span><span><b>Drop on the booth.</b> Through the broken window onto the booth roof, Elusive <span class="mono">DC 11</span>. Puts them on Boone alone, with his crew on the far side of a door. <span class="cost">A decapitation strike — and it skips every conversation that would have made him a person.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="node t-combat">
+    <div class="node-head"><span class="node-num">06</span><h3>The Bullpen</h3><span class="node-tag">Converge &middot; three modes</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>The old newsroom, cleared to the walls and turned into a supply post. Sleeping mats, a stove vented through a smashed window, crates sorted by the same four words as the loading bay. A trade ledger open on a desk, kept in a careful hand.</p>
+        <p><strong>All three routes meet here</strong> — but they arrive differently. Loud entry means the room is Alert and facing the corridor. The dock and the stairs both arrive on a flank.</p>
+        <div class="gmnote"><b>The ledger</b><p>Scavenging DC 5, or just reading it. Columns of trades: brass out, salt and meat in. Three entries are with <span class="mono">"the patrol"</span> — FEDRA. One entry, eleven months old, reads <span class="mono">"firefly — nothing owed."</span></p></div>
+      </div>
+      <div>
+        <h4>What's here</h4>
+        <ul class="whats">
+          <li><b>Ashline Ruffian</b> — bat, 1D10, 15 HP, Hit DC 6</li>
+          <li><b>Ashline Robber</b> — upgraded pipe, 2D10, 25 HP, Hit DC 5, Counter DC 8</li>
+          <li><b>Full cover everywhere</b> — desks, filing cabinets, a toppled vending machine</li>
+        </ul>
+        <h4 style="margin-top:16px">Three ways through</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key loud">FIGHT</span><span>Two Ashline plus Boone joining on round 2 from the booth. With five PCs this is winnable but costly — expect one survivor at 0 HP.</span></li>
+          <li class="branch"><span class="key">SNEAK</span><span>Group Elusive vs <span class="mono">Sneak DC 6</span> to cross to the booth door. Advantage if they killed the loading bay man quietly.</span></li>
+          <li class="branch"><span class="key">TALK</span><span>Anyone who calls out rather than shooting gets Boone, unarmed, out of the booth. Straight to <b>07</b> with the crew watching.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="node t-social">
+    <div class="node-head"><span class="node-num">07</span><h3>The Booth</h3><span class="node-tag">Social &middot; Boone</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>The soundproofed broadcast booth, glass mostly intact, foam wedges still on the walls. Boone sleeps in here because it's the only room in the building where you can't hear anything coming — which tells you what he's afraid of.</p>
+        <p><strong>Boone is not a psychopath.</strong> He's a foreman running a supply post for about twenty people who live two ridges over, and he has a real objection: <em>a lit tower brings traffic, and traffic brings the patrol he's been carefully feeding just enough to be left alone.</em></p>
+        <div class="gmnote"><b>Play him tired, not menacing</b><p>He asks what's on the other end of the signal. If a player says "the Fireflies", he laughs — not cruelly. He says: <em>"Eleven months ago a kid in a yellow jacket said the same thing. He went up on my roof and never came down. I didn't kill him. The roof did."</em> Whether that's true is up to how the party has behaved.</p></div>
+      </div>
+      <div>
+        <h4>What he has</h4>
+        <ul class="whats">
+          <li><b>The transmitter key</b> — on a lanyard, objective item 3 of 3 (or bypass with the roof code)</li>
+          <li><b>Statline if it comes to it</b> — machete 2D20, 33 HP, Hit DC 7, Sneak DC 6, Dodge DC 8, Counter DC 9. He is by far the most dangerous thing in the building.</li>
+        </ul>
+        <h4 style="margin-top:16px">What he'll take</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key">DEAL</span><span><b>A broadcast window.</b> The tower runs only between set hours, and the Ashline get told the schedule. Costs nothing, changes everything later.</span></li>
+          <li class="branch"><span class="key">DEAL</span><span><b>Trade.</b> All the party's ammunition, or a working gun, for the key and safe passage out through the bolt-hole.</span></li>
+          <li class="branch"><span class="key loud">KILL</span><span>Fast and expensive. His crew fight to the last after that, and the bolt-hole exit is lost.</span></li>
+          <li class="branch"><span class="key obj">BYPASS</span><span>They already have the door code from the roof. They can walk past this entire scene — and should be allowed to, if that's what they earned.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 -->
+  <article class="node t-puzzle">
+    <div class="node-head"><span class="node-num">08</span><h3>The Transmitter Room</h3><span class="node-tag">Puzzle</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>A hot little concrete room full of racked equipment, one steel door with a keypad, and a diesel generator that has not turned over since 2013. Three things must be true before the tower lights.</p>
+        <ul class="whats" style="margin-top:10px">
+          <li><b>1 · Fuel</b> — two full jerry cans from the loading bay <span class="dim">(03)</span></li>
+          <li><b>2 · Antenna feed</b> — spliced cable from the roof <span class="dim">(04)</span>, Maintenance DC 9</li>
+          <li><b>3 · Access</b> — Boone's key <span class="dim">(07)</span>, the roof code <span class="dim">(04)</span>, or Brutality <span class="mono">DC 11</span> to force the door <span class="cost">— loud, and it brings the bullpen</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Getting it running</h4>
+        <p><b>Maintenance DC 10</b> to repair the generator's seized starter. On a success it coughs, catches, and the room fills with noise and diesel smoke.</p>
+        <p><b>On a natural 1</b> the generator is permanently dead — the handbook is explicit about this. Do not soften it. Instead reveal the fallback: a rack of station <b>backup batteries</b>, holding just enough charge for <b>one four-minute broadcast</b>, and no second chance. This is a better scene than the success was.</p>
+        <div class="gmnote"><b>Pacing note</b><p>If you're past the two-hour mark when they get here, hand them the repair on a straight DC 10 and go straight to 09. The climax needs its twenty minutes more than the puzzle needs its third roll.</p></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 09 -->
+  <article class="node t-set">
+    <div class="node-head"><span class="node-num">09</span><h3>The Broadcast</h3><span class="node-tag">Set piece &middot; 4 rounds</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>The ON AIR lamp comes on. It is the first electric light any of these people have seen in years, and for a second nobody moves.</p>
+        <p>Then the tower starts to hum — and outside, in the lot, every Runner they slipped past turns toward the building at once.</p>
+        <p><strong>Four rounds.</strong> Someone has to sit at the desk and hold the transmit key while the rest hold the corridor. Runners arrive on rounds 2, 3 and 4 — two, then two, then the Clicker if it's still alive.</p>
+      </div>
+      <div>
+        <h4>What comes back</h4>
+        <p><b>Round 2 —</b> static, then a whoop of feedback.</p>
+        <p><b>Round 3 —</b> Wren's voice, three ridges away, badly compressed and openly crying: <em>"KVLR. KVLR. Oh, you beautiful idiots."</em></p>
+        <p><b>Round 4 —</b> Wren cuts out. A second voice comes in on the same frequency. Older. Unhurried. Not surprised.</p>
+        <div class="gmnote"><b>End the session here</b><p><em>"KVLR, KVLR. This is Sundial. We have been sitting on this frequency for six years waiting for somebody to be stupid enough to answer. Do not move. We are closer than you think."</em></p><p style="margin-top:8px">Then stop. Do not explain who Sundial is — not this session, possibly not this year.</p></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 10 -->
+  <article class="node t-combat">
+    <div class="node-head"><span class="node-num">10</span><h3>The Way Out</h3><span class="node-tag">Chase &middot; if time allows</span></div>
+    <div class="node-body">
+      <div>
+        <h4>What it is</h4>
+        <p>The gate is still locked, and the crowd is between them and it. This is a five-minute pressure scene, not a fight — narrate it fast and let them spend whatever they've got.</p>
+        <p>If you're out of time, skip it: end on Sundial's voice and open next session with the run. That's a stronger cut anyway.</p>
+      </div>
+      <div>
+        <h4>Exits, best to worst</h4>
+        <ul class="branches">
+          <li class="branch"><span class="key">ALLIED</span><span><b>Boone's bolt-hole.</b> A cut section of fence behind the dumpsters, only if they dealt with him. Free and clean.</span></li>
+          <li class="branch"><span class="key">CLIMB</span><span><b>The roof plank.</b> Elusive DC 9 to cross to the adjacent maintenance shed. Costs the plank.</span></li>
+          <li class="branch"><span class="key loud">FIGHT</span><span><b>Back to the gate.</b> Straight through whatever's left. Survival DC 8 to pick the line; failure means one PC is cut off alone.</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  </div>
+</section>
+
+<section>
+  <h2>Everything statted <span>Quick reference</span></h2>
+  <div class="tablewrap">
+  <table class="stats">
+    <thead><tr><th>Enemy</th><th>HP</th><th>Damage</th><th>Hit</th><th>Sneak</th><th>Dodge</th><th>Grapple / Counter</th><th>Where &amp; how they act</th></tr></thead>
+    <tbody>
+      <tr class="grp"><td colspan="8">Infected — the lot</td></tr>
+      <tr><td>Runner &times;5</td><td class="num">15&ndash;25</td><td class="num">3D8</td><td class="num">7</td><td class="num">7</td><td class="num">7</td><td class="num">Grapple 8</td><td>Idle among cars. Blind-ish, swarms. Slow until detected, then fast.</td></tr>
+      <tr><td>Clicker &times;1</td><td class="num">35&ndash;50</td><td class="num">3D12</td><td class="num">9</td><td class="num">10</td><td class="num">8</td><td class="num">Grapple 10</td><td>Guards the dock ramp. Echolocation, short range. Berserk on a failed sneak — no Alert phase.</td></tr>
+      <tr class="grp"><td colspan="8">The Ashline — melee only, because brass is their currency</td></tr>
+      <tr><td>Thug <span class="dim">(lobby)</span></td><td class="num">12</td><td class="num">1D8</td><td class="num">5</td><td class="num">6</td><td class="num">5</td><td class="num">Counter 6</td><td>2x4. Charges the nearest target, no tactics.</td></tr>
+      <tr><td>Ruffian <span class="dim">(lobby, bullpen)</span></td><td class="num">15</td><td class="num">1D10</td><td class="num">6</td><td class="num">6</td><td class="num">6</td><td class="num">Counter 6</td><td>Bat. Fights from behind furniture, retreats at half health.</td></tr>
+      <tr><td>Crew <span class="dim">(loading bay)</span></td><td class="num">18</td><td class="num">&mdash;</td><td class="num">7</td><td class="num">6</td><td class="num">7</td><td class="num">&mdash;</td><td>Unarmed and unaware. Holstered pistol, unloaded. The moral question.</td></tr>
+      <tr><td>Robber <span class="dim">(bullpen)</span></td><td class="num">25</td><td class="num">2D10</td><td class="num">5</td><td class="num">6</td><td class="num">7</td><td class="num">Counter 8</td><td>Upgraded pipe. Holds the stove corner, won't be drawn out.</td></tr>
+      <tr><td><b>Boone</b> <span class="dim">(booth)</span></td><td class="num">33</td><td class="num">2D20</td><td class="num">7</td><td class="num">6</td><td class="num">8</td><td class="num">Counter 9</td><td>Machete. Opens with words. If it turns, he goes for whoever is nearest the door.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:14px" class="dim">Boone's machete averages 21 damage against a 25 HP survivor. He is a conversation with a stat block attached, and the party should feel that the moment they see him stand up.</p>
+</section>
+
+<section>
+  <h2>Two and a half hours <span>Pacing sheet</span></h2>
+  <div class="pacing">
+    <div class="pace"><div class="clock">0:00</div><div class="what"><b>Cold open &mdash; the lot</b><span>No introductions. Read the boxed text, ask the question, let them talk. Characters reveal themselves through what they do here.</span></div></div>
+    <div class="pace"><div class="clock">0:25</div><div class="what"><b>Crossing &amp; the way in</b><span>Nodes 01 → 02/03/04. The choice of entrance is the session's first real decision — let it take five minutes of argument.</span></div></div>
+    <div class="pace"><div class="clock">0:55</div><div class="what"><b>Inside &mdash; the low-intensity stretch</b><span>Nodes 03/04/05. Looting, the ash lines, the dead Firefly, the ledger. This is where the world gets built. Do not rush it; they've earned quiet.</span></div></div>
+    <div class="pace"><div class="clock">1:25</div><div class="what"><b>The bullpen</b><span>Node 06. Whichever of the three modes they pick, this is the session's midpoint spike.</span></div></div>
+    <div class="pace"><div class="clock">1:45</div><div class="what"><b>Boone</b><span>Node 07. Give this fifteen full minutes if they talk. It's the scene that decides what kind of campaign this becomes.</span></div></div>
+    <div class="pace"><div class="clock">2:00</div><div class="what"><b>The generator</b><span>Node 08. Fast. If you're behind, hand them the repair.</span></div></div>
+    <div class="pace"><div class="clock">2:10</div><div class="what"><b>On air</b><span>Node 09. Four rounds, then Sundial, then stop talking.</span></div></div>
+    <div class="pace"><div class="clock">2:30</div><div class="what"><b>Pills &amp; journals</b><span>Award 30&ndash;50 Pills each. Five minutes for everyone to fill in the Survivor's Journal — objectives, faction standing with the Ashline, travel log. Establish this habit in session one and it carries the campaign.</span></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Before Friday <span>Prep checklist</span></h2>
+  <ul class="check">
+    <li><b>Print five character sheets</b> plus the Survivor's Journal page</li>
+    <li><b>Decide the region.</b> Ludlow Ridge can be anywhere — relocating it near your own town pays off enormously with a table of locals</li>
+    <li><b>Index-card the ash line</b> so you remember to describe it on every interior door</li>
+    <li><b>Write Boone's first line down</b> and read it, don't improvise it</li>
+    <li><b>Pre-roll the Runners' HP</b> (15&ndash;25 each) so you're not rolling mid-scene</li>
+    <li><b>Print the door code</b> <span class="mono">4-9-1-1</span> on a scrap of paper to hand over physically</li>
+    <li><b>Have the combat card open</b> — Dodge DCs and the Overwhelming Odds rule are what you'll reach for</li>
+    <li><b>Decide now</b> whether Boone is telling the truth about the dead Firefly. You will be asked.</li>
+    <li><b>Session Zero first</b> — 45 minutes, everyone builds together. Push for one strong Maintenance and one Medicine.</li>
+    <li><b>Do not name Sundial.</b> Not this session.</li>
+  </ul>
+</section>
+
+<footer>
+  Session 01 &middot; Look for the Light &middot; The Last of Us TTRPG &middot; standard rules
+</footer>
+
+</div>
+</body>
+</html>

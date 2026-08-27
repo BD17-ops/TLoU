@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E5E7E3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121618" media="(prefers-color-scheme: dark)">
+<meta name="description" content="The Sundial Arc — The Last of Us TTRPG session kit.">
+<title>The Sundial Arc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#E5E7E3; --surface:#F4F4F2; --sunk:#DBDDD8; --rule:#C4C7C1; --rule2:#9EA4A0;
+  --ink:#171A1C; --ink2:#4C5457; --ink3:#787F83;
+  --amber:#A85D0A; --amber-soft:#F2E3C9; --amber-line:#D89B33;
+  --rust:#95311F; --rust-soft:#F2DCD6;
+  --signal:#265F75; --signal-soft:#D8E6EC;
+  --node:#FBFBFA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+    --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+    --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+    --rust:#D4735D; --rust-soft:#301B17;
+    --signal:#6FB4CD; --signal-soft:#152730;
+    --node:#1E2427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+  --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+  --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+  --rust:#D4735D; --rust-soft:#301B17;
+  --signal:#6FB4CD; --signal-soft:#152730;
+  --node:#1E2427;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); margin:0;
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.52; -webkit-font-smoothing:antialiased}
+.page{max-width:1220px; margin:0 auto; padding:40px 28px 80px}
+
+.mast{border-top:6px solid var(--ink); padding-top:16px; margin-bottom:26px}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:8px}
+.mast h1{font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:800;
+  font-size:clamp(46px,8vw,96px); line-height:.85; letter-spacing:.005em;
+  text-transform:uppercase; margin:0 0 16px; text-wrap:balance}
+.mast h1 em{font-style:normal; color:var(--amber)}
+.standfirst{font-size:17.5px; color:var(--ink2); max-width:64ch; margin:0}
+.standfirst b{color:var(--ink); font-weight:600}
+
+.stripbar{display:flex; flex-wrap:wrap; border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule); margin:24px 0 42px}
+.stripbar div{padding:12px 22px 12px 0; margin-right:22px; border-right:1px solid var(--rule);
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink3)}
+.stripbar div:last-child{border-right:none; margin-right:0}
+.stripbar b{display:block; color:var(--ink); font-size:13px; letter-spacing:.04em;
+  margin-top:3px; font-weight:600}
+
+h2{font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:700;
+  font-size:32px; line-height:1; letter-spacing:.02em; text-transform:uppercase;
+  margin:0 0 16px; padding-bottom:8px; border-bottom:2px solid var(--ink);
+  display:flex; align-items:baseline; gap:14px}
+h2 span{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+  letter-spacing:.12em; color:var(--amber); margin-left:auto; white-space:nowrap}
+p{margin:0 0 11px; max-width:68ch}
+section{margin-bottom:48px}
+.dim{color:var(--ink2)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* premise */
+.premise{background:var(--sunk); border-left:6px solid var(--amber-line); padding:24px 28px; margin-bottom:44px}
+.premise p{font-size:16.5px; max-width:70ch}
+.premise p:last-child{margin-bottom:0}
+.premise b{font-weight:600}
+
+.spoiler{background:var(--rust-soft); border:1px solid var(--rust); border-left-width:6px;
+  padding:18px 22px; margin:18px 0 0}
+.spoiler h4{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--rust); margin:0 0 8px; font-weight:600}
+.spoiler p{margin:0 0 9px; font-size:14.5px}
+.spoiler p:last-child{margin-bottom:0}
+
+/* figure */
+.figwrap{overflow-x:auto; background:var(--surface); border:1px solid var(--rule); padding:26px 22px}
+figure{margin:0}
+figure svg{display:block; width:100%; min-width:880px; height:auto}
+figcaption{font-size:13.5px; color:var(--ink2); margin-top:14px; max-width:76ch}
+
+/* session bands */
+.arc{display:grid; gap:18px}
+.sesh{display:grid; grid-template-columns:150px minmax(0,1fr); background:var(--surface);
+  border:1px solid var(--rule); border-left:5px solid var(--rule2)}
+.sesh.k-open{border-left-color:var(--amber-line)}
+.sesh.k-siege{border-left-color:var(--rust)}
+.sesh.k-road{border-left-color:var(--signal)}
+.sesh.k-social{border-left-color:var(--signal)}
+.sesh.k-climax{border-left-color:var(--rust)}
+@media (max-width:720px){.sesh{grid-template-columns:1fr}}
+.rail{padding:18px 16px; background:var(--sunk); border-right:1px solid var(--rule);
+  display:flex; flex-direction:column; gap:14px}
+@media (max-width:720px){.rail{border-right:none; border-bottom:1px solid var(--rule);
+  flex-direction:row; flex-wrap:wrap; align-items:center; gap:20px}}
+.rail .sn{font-family:"Big Shoulders Display",sans-serif; font-size:46px; font-weight:800;
+  line-height:.8; color:var(--amber)}
+.rail .lab{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink3); display:block; margin-bottom:5px}
+.meter{display:flex; gap:3px}
+.meter i{display:block; width:15px; height:8px; background:var(--rule); font-style:normal}
+.meter i.on{background:var(--rust)}
+.meter.prep i.on{background:var(--amber-line)}
+.rail .val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:600; color:var(--ink)}
+
+.body{padding:18px 24px 22px}
+.body .head{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:4px}
+.body h3{font-family:"Big Shoulders Display",sans-serif; font-size:33px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.02em; margin:0; line-height:1}
+.kind{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:600; padding:4px 9px; white-space:nowrap}
+.k-open .kind,.k-climax .kind{background:var(--amber-soft); color:var(--amber)}
+.k-siege .kind{background:var(--rust-soft); color:var(--rust)}
+.k-road .kind,.k-social .kind{background:var(--signal-soft); color:var(--signal)}
+.obj{font-size:15.5px; color:var(--ink2); margin:0 0 14px; max-width:66ch}
+.obj b{color:var(--ink); font-weight:600}
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; margin-top:14px}
+.cols h4{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink2); margin:0 0 7px; font-weight:600;
+  padding-bottom:5px; border-bottom:1px solid var(--rule)}
+.cols ul{margin:0; padding-left:15px; font-size:13.5px; color:var(--ink2)}
+.cols li{margin-bottom:4px}
+.cols li b{color:var(--ink); font-weight:600}
+.cols p{font-size:13.5px; color:var(--ink2); margin:0; max-width:none}
+.endson{margin-top:16px; padding:12px 16px; background:var(--bg); border:1px solid var(--rule);
+  font-size:14px}
+.endson b{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--amber); display:block; margin-bottom:4px}
+
+/* tables */
+.tablewrap{overflow-x:auto}
+table.d{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums}
+table.d th{text-align:left; font-family:"IBM Plex Mono",monospace; font-size:10px;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink2); font-weight:600;
+  padding:0 16px 8px 0; border-bottom:2px solid var(--ink); white-space:nowrap}
+table.d td{padding:10px 16px 10px 0; border-bottom:1px solid var(--rule); vertical-align:top}
+table.d tr:last-child td{border-bottom:none}
+table.d td:first-child{font-weight:600}
+table.d .num{font-family:"IBM Plex Mono",monospace; white-space:nowrap}
+table.d tfoot td{border-top:2px solid var(--ink); border-bottom:none; font-weight:600;
+  padding-top:11px; font-family:"IBM Plex Mono",monospace}
+
+/* teaching curve */
+.teach{display:grid; grid-template-columns:repeat(auto-fit,minmax(196px,1fr)); gap:0;
+  border:1px solid var(--rule)}
+.teach > div{padding:16px 18px; border-right:1px solid var(--rule)}
+.teach > div:last-child{border-right:none}
+.teach .s{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.14em;
+  color:var(--amber); font-weight:600; display:block; margin-bottom:9px}
+.teach ul{margin:0; padding-left:15px; font-size:13.5px; color:var(--ink2)}
+.teach li{margin-bottom:5px}
+.teach li b{color:var(--ink); font-weight:600}
+
+/* flex notes */
+.flex{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px}
+.fcard{background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--signal); padding:16px 18px}
+.fcard h4{font-family:"Big Shoulders Display",sans-serif; font-size:21px; font-weight:700;
+  text-transform:uppercase; margin:0 0 7px; letter-spacing:.02em}
+.fcard p{font-size:13.5px; color:var(--ink2); margin:0; max-width:none}
+
+/* act two */
+.acts{display:grid; gap:0; border:1px solid var(--rule)}
+.act{display:grid; grid-template-columns:132px 1fr; border-bottom:1px solid var(--rule)}
+.act:last-child{border-bottom:none}
+.act .n{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.13em;
+  text-transform:uppercase; padding:16px; background:var(--sunk); color:var(--amber);
+  font-weight:600; border-right:1px solid var(--rule)}
+.act .t{padding:16px 20px}
+.act .t b{display:block; font-family:"Big Shoulders Display",sans-serif; font-size:22px;
+  font-weight:700; text-transform:uppercase; letter-spacing:.02em; margin-bottom:4px}
+.act .t span{font-size:14px; color:var(--ink2)}
+@media (max-width:600px){.act{grid-template-columns:1fr} .act .n{border-right:none; border-bottom:1px solid var(--rule)}}
+
+footer{border-top:1px solid var(--rule); margin-top:52px; padding-top:18px;
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em;
+  color:var(--ink3); text-transform:uppercase}
+
+/* --- site nav (added for tablet use) --- */
+.sitenav{position:sticky; top:0; z-index:50; display:flex; flex-wrap:wrap; gap:0;
+  background:var(--sunk); border-bottom:1px solid var(--rule2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px;
+  letter-spacing:.13em; text-transform:uppercase;
+  -webkit-backdrop-filter:saturate(180%) blur(6px); backdrop-filter:saturate(180%) blur(6px)}
+.sitenav a{display:block; padding:13px 18px; color:var(--ink2); text-decoration:none;
+  border-right:1px solid var(--rule); min-height:44px; line-height:20px}
+.sitenav a:hover{color:var(--ink); background:var(--surface)}
+.sitenav a:focus-visible{outline:2px solid var(--amber); outline-offset:-2px}
+.sitenav a[aria-current="page"]{color:var(--amber); font-weight:600; background:var(--bg);
+  box-shadow:inset 0 -3px 0 var(--amber)}
+@media print{
+  .sitenav{display:none}
+  figure svg{min-width:0 !important}
+  .figwrap{overflow:visible; border:none; padding:0}
+  .sesh,.node,.pace,.act,.trow,.mod,.fcard,.link,.branch,.crits,.teach>div,.loop>div{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  a{text-decoration:none; color:inherit}
+}
+</style>
+</head>
+<body>
+<nav class="sitenav" aria-label="Session kit">
+<a href="index.html">Kit</a>
+<a href="combat.html">Combat</a>
+<a href="session-01.html">Session 01</a>
+<a href="act-one.html" aria-current="page">Act One</a>
+</nav>
+<div class="page">
+
+<header class="mast">
+  <div class="eyebrow">Look for the Light &middot; Act One &middot; Sessions 01&ndash;05</div>
+  <h1>The <em>Sundial</em><br>Arc</h1>
+  <p class="standfirst">Five sessions, roughly ten weeks. The party lights one relay and learns that somebody has been listening the whole time. <b>The question Act One asks is not "is anyone out there" — it's "what do you owe the people who never answered."</b></p>
+</header>
+
+<div class="stripbar">
+  <div>Sessions<b>5 &times; 2.5 hours</b></div>
+  <div>Cadence<b>Twice monthly, Fridays</b></div>
+  <div>Span<b>~10 weeks</b></div>
+  <div>Pills awarded<b>~210 per player</b></div>
+  <div>Rules<b>Standard throughout</b></div>
+  <div>Relays lit<b>1 &rarr; 2</b></div>
+</div>
+
+<div class="premise">
+  <p>Act One is built so that <b>the party's own first victory causes its final crisis.</b> Lighting KVLR is the right thing to do and they should feel good about it — and it is also the act that puts a bearing on a FEDRA signals map. Every subsequent broadcast adds another line. By session five the lines cross, and they cross over people the party has come to care about.</p>
+  <p>That's the engine. Everything else is scenery.</p>
+
+  <div class="spoiler">
+    <h4>GM only &mdash; what Sundial is</h4>
+    <p><b>Sundial is not a threat.</b> It's a functioning settlement of about two hundred people living in a Cold War&ndash;era relay bunker: lights, running water, a greenhouse, a school with actual children in it. They have been listening to the whole surviving network for six years and have <b>never once transmitted</b>, because transmitting is how you get found.</p>
+      <p>They are, in other words, exactly what the campaign is reaching for — and they will not join the chain, because the chain endangers them. The antagonist of Act One is <b>people who have already achieved the thing you want and won't share it</b>, and who are not wrong to be afraid.</p>
+    <p>The image that turns this from a negotiation into a moral problem is in session four: a wall in their comms room listing every call sign that ever cried for help on the network. Six years of them. All unanswered, all recorded in a careful hand.</p>
+  </div>
+</div>
+
+<section>
+  <h2>The spine <span>Cause and consequence</span></h2>
+  <div class="figwrap">
+  <figure>
+    <svg viewBox="0 0 1140 470" role="img" aria-label="Two-lane diagram of the five-session arc. The upper lane shows what the party does each session: The Signal, Hold the Ridge, The Hard Road, The Glass House, and Who Answers. The lower lane shows the unseen consequence: after the party's first broadcast a FEDRA patrol logs one bearing, then a second, then a third as the lines cross, then a column is assembled. At session five the lower lane rises into the upper lane as the consequence arrives.">
+      <defs>
+        <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--rule2,#9EA4A0)"></path>
+        </marker>
+        <marker id="mr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--rust,#95311F)"></path>
+        </marker>
+      </defs>
+
+      <!-- session numbers -->
+      <g font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6" fill="var(--ink3,#787F83)" text-anchor="middle">
+        <text x="250" y="34">SESSION 01</text>
+        <text x="440" y="34">SESSION 02</text>
+        <text x="630" y="34">SESSION 03</text>
+        <text x="820" y="34">SESSION 04</text>
+        <text x="1010" y="34">SESSION 05</text>
+      </g>
+
+      <!-- lane labels -->
+      <g font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.5" fill="var(--ink2,#4C5457)" font-weight="600">
+        <text x="6" y="92">WHAT THE</text>
+        <text x="6" y="106">PARTY DOES</text>
+        <text x="6" y="330" fill="var(--rust,#95311F)">WHAT THEY</text>
+        <text x="6" y="344" fill="var(--rust,#95311F)">SET OFF</text>
+      </g>
+
+      <!-- top lane connectors -->
+      <g fill="none" stroke="var(--rule2,#9EA4A0)" stroke-width="1.8" marker-end="url(#m)">
+        <path d="M326,101 H356"></path>
+        <path d="M516,101 H546"></path>
+        <path d="M706,101 H736"></path>
+        <path d="M896,101 H926"></path>
+      </g>
+
+      <!-- descend -->
+      <path d="M250,148 V290" fill="none" stroke="var(--rust,#95311F)" stroke-width="1.8"
+            stroke-dasharray="7 5" marker-end="url(#mr)"></path>
+      <text x="262" y="222" font-family="IBM Plex Mono, monospace" font-size="11.5"
+            fill="var(--rust,#95311F)" font-weight="600">the broadcast is heard</text>
+
+      <!-- bottom lane connectors -->
+      <g fill="none" stroke="var(--rust,#95311F)" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#mr)">
+        <path d="M326,334 H356"></path>
+        <path d="M516,334 H546"></path>
+        <path d="M706,334 H736"></path>
+      </g>
+
+      <!-- converge up -->
+      <path d="M896,334 H1010 V152" fill="none" stroke="var(--rust,#95311F)" stroke-width="2.4"
+            marker-end="url(#mr)"></path>
+      <text x="1002" y="222" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11.5"
+            fill="var(--rust,#95311F)" font-weight="600">it arrives</text>
+
+      <!-- TOP boxes -->
+      <g>
+        <rect x="174" y="56" width="152" height="92" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="174" y="56" width="4" height="92" fill="var(--amber-line,#D89B33)"></rect>
+        <text x="190" y="88" font-family="Big Shoulders Display, sans-serif" font-size="24" font-weight="700" fill="var(--ink,#171A1C)">THE SIGNAL</text>
+        <text x="190" y="108" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="1.2" fill="var(--ink2,#4C5457)">INFILTRATION</text>
+        <text x="190" y="132" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--amber,#A85D0A)" font-weight="600">KVLR goes live</text>
+      </g>
+      <g>
+        <rect x="364" y="56" width="152" height="92" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="364" y="56" width="4" height="92" fill="var(--rust,#95311F)"></rect>
+        <text x="380" y="88" font-family="Big Shoulders Display, sans-serif" font-size="24" font-weight="700" fill="var(--ink,#171A1C)">HOLD THE RIDGE</text>
+        <text x="380" y="108" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="1.2" fill="var(--ink2,#4C5457)">SIEGE</text>
+        <text x="380" y="132" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--amber,#A85D0A)" font-weight="600">one night, one bearing</text>
+      </g>
+      <g>
+        <rect x="554" y="56" width="152" height="92" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="554" y="56" width="4" height="92" fill="var(--signal,#265F75)"></rect>
+        <text x="570" y="88" font-family="Big Shoulders Display, sans-serif" font-size="24" font-weight="700" fill="var(--ink,#171A1C)">THE HARD ROAD</text>
+        <text x="570" y="108" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="1.2" fill="var(--ink2,#4C5457)">OPEN WORLD</text>
+        <text x="570" y="132" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--amber,#A85D0A)" font-weight="600">followed for two days</text>
+      </g>
+      <g>
+        <rect x="744" y="56" width="152" height="92" fill="var(--node,#FBFBFA)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+        <rect x="744" y="56" width="4" height="92" fill="var(--signal,#265F75)"></rect>
+        <text x="760" y="88" font-family="Big Shoulders Display, sans-serif" font-size="24" font-weight="700" fill="var(--ink,#171A1C)">THE GLASS HOUSE</text>
+        <text x="760" y="108" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="1.2" fill="var(--ink2,#4C5457)">SOCIAL INFILTRATION</text>
+        <text x="760" y="132" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--amber,#A85D0A)" font-weight="600">the wall of names</text>
+      </g>
+      <g>
+        <rect x="934" y="56" width="152" height="92" fill="var(--node,#FBFBFA)" stroke="var(--rust,#95311F)" stroke-width="2.5"></rect>
+        <rect x="934" y="56" width="4" height="92" fill="var(--rust,#95311F)"></rect>
+        <text x="950" y="88" font-family="Big Shoulders Display, sans-serif" font-size="24" font-weight="700" fill="var(--ink,#171A1C)">WHO ANSWERS</text>
+        <text x="950" y="108" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="1.2" fill="var(--ink2,#4C5457)">CLIMAX</text>
+        <text x="950" y="132" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--amber,#A85D0A)" font-weight="600">the choice</text>
+      </g>
+
+      <!-- BOTTOM boxes -->
+      <g>
+        <rect x="174" y="300" width="152" height="68" fill="var(--rust-soft,#F2DCD6)" stroke="var(--rust,#95311F)" stroke-width="1.3"></rect>
+        <text x="190" y="326" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="var(--rust,#95311F)">BEARING 1</text>
+        <text x="190" y="346" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">a patrol logs a</text>
+        <text x="190" y="358" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">new AM carrier</text>
+      </g>
+      <g>
+        <rect x="364" y="300" width="152" height="68" fill="var(--rust-soft,#F2DCD6)" stroke="var(--rust,#95311F)" stroke-width="1.3"></rect>
+        <text x="380" y="326" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="var(--rust,#95311F)">BEARING 2</text>
+        <text x="380" y="346" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">a second line</text>
+        <text x="380" y="358" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">on the map</text>
+      </g>
+      <g>
+        <rect x="554" y="300" width="152" height="68" fill="var(--rust-soft,#F2DCD6)" stroke="var(--rust,#95311F)" stroke-width="1.3"></rect>
+        <text x="570" y="326" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="var(--rust,#95311F)">BEARING 3</text>
+        <text x="570" y="346" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">the lines cross</text>
+        <text x="570" y="358" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">over the bunker</text>
+      </g>
+      <g>
+        <rect x="744" y="300" width="152" height="68" fill="var(--rust-soft,#F2DCD6)" stroke="var(--rust,#95311F)" stroke-width="1.3"></rect>
+        <text x="760" y="326" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="var(--rust,#95311F)">A COLUMN MOVES</text>
+        <text x="760" y="346" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">four days out,</text>
+        <text x="760" y="358" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink2,#4C5457)">and nobody knows</text>
+      </g>
+    </svg>
+    <figcaption>The lower lane never appears on screen until session five. Each broadcast the party makes hands FEDRA another bearing — which makes "should we transmit" a real cost the players can learn to feel, rather than a plot device that happens to them.</figcaption>
+  </figure>
+  </div>
+</section>
+
+<section>
+  <h2>Session by session <span>Intensity &middot; prep &middot; pills</span></h2>
+  <div class="arc">
+
+  <!-- S1 -->
+  <article class="sesh k-open">
+    <div class="rail">
+      <div class="sn">01</div>
+      <div><span class="lab">Intensity</span><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+      <div><span class="lab">Prep</span><div class="meter prep"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+      <div><span class="lab">Pills</span><span class="val">40 each</span></div>
+    </div>
+    <div class="body">
+      <div class="head"><h3>The Signal</h3><span class="kind">Linear &middot; infiltration</span></div>
+      <p class="obj"><b>Objective:</b> get inside KVLR, find fuel, cable and a key, and put the tower back on the air. <span class="dim">Fully built — see the KVLR 1490 session map.</span></p>
+      <div class="cols">
+        <div><h4>Must establish</h4><ul>
+          <li>Combat is <b>lethal</b> and avoidance is the winning move</li>
+          <li>The <b>Ashline</b> exist and have a standing</li>
+          <li>Wren omitted something</li>
+          <li>The Survivor's Journal habit</li>
+        </ul></div>
+        <div><h4>New mechanics</h4><ul>
+          <li>Skill checks, DCs, crits</li>
+          <li><b>Stealth states</b> and stealth kills</li>
+          <li>Scavenging and loot themes</li>
+          <li>Grapple as a defence</li>
+        </ul></div>
+        <div><h4>Where it flexes</h4><p>Cut node 10 entirely if you're short — ending on Sundial's voice is a cleaner cut than a chase, and the escape opens session two beautifully.</p></div>
+      </div>
+      <div class="endson"><b>Ends on</b>Sundial answers: <em>"We have been sitting on this frequency for six years waiting for somebody to be stupid enough to answer."</em></div>
+    </div>
+  </article>
+
+  <!-- S2 -->
+  <article class="sesh k-siege">
+    <div class="rail">
+      <div class="sn">02</div>
+      <div><span class="lab">Intensity</span><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+      <div><span class="lab">Prep</span><div class="meter prep"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+      <div><span class="lab">Pills</span><span class="val">50 each</span></div>
+    </div>
+    <div class="body">
+      <div class="head"><h3>Hold the Ridge</h3><span class="kind">Siege &middot; defence</span></div>
+      <p class="obj"><b>Objective:</b> Wren reaches KVLR with a directional receiver. She needs the tower transmitting for a full night to get a bearing on Sundial — and the FEDRA patrol named in the Ashline ledger saw the tower light up two nights ago. <b>Hold the station until dawn.</b></p>
+      <div class="cols">
+        <div><h4>Why this session</h4><p>It inverts session one. Same building, but now they own it and something is coming to take it. Fortifying a space you had to sneak through is enormously satisfying, and it costs you almost no new prep — you already have the map.</p></div>
+        <div><h4>New mechanics</h4><ul>
+          <li><b>Crafting</b> — molotovs, nail bombs, <b>trap mines</b></li>
+          <li><b>Cover</b> properly, against guns for the first time</li>
+          <li>The <b>15+ damage charts</b> — humans with rifles</li>
+          <li>Chokepoints, generators, and the fuel clock</li>
+        </ul></div>
+        <div><h4>The Ashline pay off</h4><p><b>Allied:</b> six melee fighters hold the lobby with them. <b>Hostile:</b> a second front, and Boone's people know the building better. <b>Destroyed:</b> nobody but them, and the loading bay is undefended. Session one's choices are worth an entire act structure here.</p></div>
+      </div>
+      <div class="endson"><b>Ends on</b>Wren has a bearing and a direction. The cost is real — lose a named NPC here, not a PC. <span class="dim">FEDRA now has the frequency and a second line on the map.</span></div>
+    </div>
+  </article>
+
+  <!-- S3 -->
+  <article class="sesh k-road">
+    <div class="rail">
+      <div class="sn">03</div>
+      <div><span class="lab">Intensity</span><div class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+      <div><span class="lab">Prep</span><div class="meter prep"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+      <div><span class="lab">Pills</span><span class="val">30 each</span></div>
+    </div>
+    <div class="body">
+      <div class="head"><h3>The Hard Road</h3><span class="kind">Open world &middot; travel</span></div>
+      <p class="obj"><b>Objective:</b> cross roughly ninety miles toward the bearing. <b>This is the session where everyone breathes.</b> Low combat density, high world, and the first real chance for the five of them to be people rather than a tactical unit.</p>
+      <div class="cols">
+        <div><h4>Why this session</h4><p>The book distinguishes Open World from Linear travel for a reason, and two dungeons back to back will flatten your table. This one is also your <b>light prep Friday</b> — an encounter table does most of the work, so schedule it for a week you're buried at school.</p></div>
+        <div><h4>New mechanics</h4><ul>
+          <li><b>Survival checks drive encounters</b> — good and bad</li>
+          <li><b>Transportation</b> — a horse, if they earn one</li>
+          <li>The <b>infection clock</b>, if someone gets bitten out here</li>
+          <li>A second relay station, optional and skippable</li>
+        </ul></div>
+        <div><h4>Plant here</h4><p>They are being followed, and have been for two days. <b>Ivo</b>, a Sundial scout, sent to look at them before anyone decides anything. He is not hiding especially well — he wants to be found on his own terms.</p></div>
+      </div>
+      <div class="endson"><b>Ends on</b>Ivo steps out of the treeline with his hands open and says he's been told to bring five people, blindfolded, or nobody at all.</div>
+    </div>
+  </article>
+
+  <!-- S4 -->
+  <article class="sesh k-social">
+    <div class="rail">
+      <div class="sn">04</div>
+      <div><span class="lab">Intensity</span><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      <div><span class="lab">Prep</span><div class="meter prep"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      <div><span class="lab">Pills</span><span class="val">30 each</span></div>
+    </div>
+    <div class="body">
+      <div class="head"><h3>The Glass House</h3><span class="kind">Social infiltration</span></div>
+      <p class="obj"><b>Objective:</b> get inside Sundial, and get a look at the transmitter they're sitting on. <b>Almost no combat.</b> They are guests — disarmed, fed, given beds, shown a greenhouse and a classroom — and none of it is a trick. That's what makes it hard.</p>
+      <div class="cols">
+        <div><h4>Why this session</h4><p>Your table of teachers will remember this one. The tension is entirely social: everyone is kind, the food is hot, there are children doing long division, and the leadership will not let them leave with the location. A velvet cage is more unsettling than a dungeon and costs you nothing in stat blocks.</p></div>
+        <div><h4>New mechanics</h4><ul>
+          <li>Faction standing as a <b>tracked value</b>, not a vibe</li>
+          <li>Introduce <b>Morality</b> now, if the group wants it — it gives them a lever in a session with no combat</li>
+          <li>No new combat rules at all. Let them rest.</li>
+        </ul></div>
+        <div><h4>The turn</h4><p>The comms room. A wall of call signs — every voice that has cried for help on this network in six years, logged in a careful hand, <b>every one of them unanswered.</b> Sundial isn't hiding a monster. It's hiding a choice they make every single day.</p></div>
+      </div>
+      <div class="endson"><b>Ends on</b>An offer: stay, join us, stop transmitting. And a condition — you don't leave with what you now know.</div>
+    </div>
+  </article>
+
+  <!-- S5 -->
+  <article class="sesh k-climax">
+    <div class="rail">
+      <div class="sn">05</div>
+      <div><span class="lab">Intensity</span><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+      <div><span class="lab">Prep</span><div class="meter prep"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+      <div><span class="lab">Pills</span><span class="val">60 each</span></div>
+    </div>
+    <div class="body">
+      <div class="head"><h3>Who Answers</h3><span class="kind">Climax &middot; the choice</span></div>
+      <p class="obj"><b>Objective:</b> decide what Sundial is for. The FEDRA column that's been assembling since session two arrives four days out, and the party is the only reason anyone knows it's coming — <b>because the party is the reason it's coming.</b></p>
+      <div class="cols">
+        <div><h4>The choice</h4><ul>
+          <li><b>Warn and defend</b> — spend everything to save people who wouldn't help you</li>
+          <li><b>Leverage</b> — Sundial joins the chain or fights alone</li>
+          <li><b>Take the map and run</b> — six years of call signs is the campaign in one document</li>
+          <li><b>Open the frequency</b> — broadcast Sundial's location in clear and call every surviving cell. Help comes. So does everything else.</li>
+        </ul></div>
+        <div><h4>New mechanics</h4><ul>
+          <li>Everything at once — this is the exam</li>
+          <li><b>Optional:</b> if a PC dies or a party member is lost here, this is your natural moment to introduce <b>Trauma</b> as a consequence rather than a rule</li>
+        </ul></div>
+        <div><h4>What must be true after</h4><p>The chain has a second light or it doesn't. Every faction has a fixed standing. And the players understand that transmitting has a price — which is the tension the whole campaign runs on from here.</p></div>
+      </div>
+      <div class="endson"><b>Ends on</b>Whatever they chose, the radio is on, and this time more than one voice comes back.</div>
+    </div>
+  </article>
+
+  </div>
+</section>
+
+<section>
+  <h2>Progression <span>The only dial you have</span></h2>
+  <p>There is no XP and no levels — Pills are the entire curve. The awards below are tuned so that every player can afford <strong>Life Tier 1 (50 Max Health)</strong> before session five, which is what stops the climax being a bloodbath. Front-load slightly; scarcity gets more interesting once they own things worth losing.</p>
+  <div class="tablewrap">
+    <table class="d">
+      <thead><tr><th>Session</th><th class="num">Pills</th><th class="num">Running total</th><th>What it should be buying</th></tr></thead>
+      <tbody>
+        <tr><td>01 &middot; The Signal</td><td class="num">40</td><td class="num">40</td><td>One Tier&nbsp;1 skill modifier. First taste of getting better at something.</td></tr>
+        <tr><td>02 &middot; Hold the Ridge</td><td class="num">50</td><td class="num">90</td><td>A second Tier&nbsp;1, or start saving. Expect heavy First Aid Kit crafting to eat their Parts, not their Pills.</td></tr>
+        <tr><td>03 &middot; The Hard Road</td><td class="num">30</td><td class="num">120</td><td><b>Life Tier 1 (60)</b> becomes affordable. Nudge anyone who hasn't taken it.</td></tr>
+        <tr><td>04 &middot; The Glass House</td><td class="num">30</td><td class="num">150</td><td>Utility upgrades — Medic, Resilience, Night Vision. A quiet session is when people invest in staying alive.</td></tr>
+        <tr><td>05 &middot; Who Answers</td><td class="num">60</td><td class="num">210</td><td>A <b>D12 skill die</b> (60&ndash;90) is now in reach. Ending Act One with a die upgrade feels like a level-up without being one.</td></tr>
+      </tbody>
+      <tfoot><tr><td>Act One total</td><td class="num">210</td><td class="num">per player</td><td></td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Teaching curve <span>Don't dump it all in session one</span></h2>
+  <p>Five players learning a new system need roughly two new mechanics a session, not twelve. This is the order I'd introduce them in — each one arrives in the session that makes it obviously useful.</p>
+  <div class="teach">
+    <div><span class="s">SESSION 01</span><ul>
+      <li>Skill checks &amp; DCs</li>
+      <li><b>Stealth states</b></li>
+      <li>Basic combat &amp; dodge</li>
+      <li>Scavenging</li>
+    </ul></div>
+    <div><span class="s">SESSION 02</span><ul>
+      <li><b>Crafting</b> &amp; throwables</li>
+      <li>Cover against firearms</li>
+      <li>The 15+ damage charts</li>
+      <li>Overwhelming Odds, felt properly</li>
+    </ul></div>
+    <div><span class="s">SESSION 03</span><ul>
+      <li><b>Open World travel</b></li>
+      <li>Survival-driven encounters</li>
+      <li>Transportation</li>
+      <li>Infection clock (if it comes up)</li>
+    </ul></div>
+    <div><span class="s">SESSION 04</span><ul>
+      <li>Faction standing, tracked</li>
+      <li><b>Morality</b>, optional</li>
+      <li>Nothing new in combat</li>
+    </ul></div>
+    <div><span class="s">SESSION 05</span><ul>
+      <li>All of it, under pressure</li>
+      <li><b>Trauma</b> — only if the fiction earns it</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Running it around a teaching job <span>Prep load</span></h2>
+  <div class="flex">
+    <div class="fcard">
+      <h4>Two heavy Fridays</h4>
+      <p>Sessions <b>02</b> and <b>05</b> need real prep — a wave plan and a defended map for the siege, and a four-way branching climax that has to land. Everything else is light-to-medium.</p>
+    </div>
+    <div class="fcard">
+      <h4>Session 03 is your recovery</h4>
+      <p>An encounter table does most of the work. If a marking week collides with a session, make it this one — and don't be afraid to move it in the running order.</p>
+    </div>
+    <div class="fcard">
+      <h4>Session 02 reuses session 01's map</h4>
+      <p>Deliberately. Same building, inverted purpose. It's the cheapest strong session in the arc and it makes session one's geography pay dividends.</p>
+    </div>
+    <div class="fcard">
+      <h4>Track four things, that's all</h4>
+      <p><b>Ashline standing · Sundial standing · bearings FEDRA holds · relays lit.</b> Four lines on an index card after every session. Everything else lives in the players' journals.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>If it goes sideways <span>Contingencies</span></h2>
+  <div class="tablewrap">
+    <table class="d">
+      <thead><tr><th>If&hellip;</th><th>Then</th></tr></thead>
+      <tbody>
+        <tr><td>They refuse to go toward Sundial</td><td>Sundial comes to them. Ivo arrives at KVLR in session three instead, with the same offer and more urgency. The arc is about the meeting, not the journey.</td></tr>
+        <tr><td>They kill Boone in session one</td><td>Session two is harder and lonelier, and that's the correct consequence. Give the Ashline survivors a grievance that pays off in Act Two rather than punishing the siege further.</td></tr>
+        <tr><td>A PC dies before session five</td><td>Bring the new character in through the faction the party is currently closest to. A Sundial defector in session four is an especially good entry.</td></tr>
+        <tr><td>Sessions run long</td><td>Cut the second relay station in session three and the escape in session one. Never cut the Boone conversation or the wall of names — those are the arc's two load-bearing scenes.</td></tr>
+        <tr><td>The group loves the talking more than the fighting</td><td>Lean in. Expand session four to two sessions and push the climax to session six. A table of teachers finding out they enjoy negotiation is a good problem.</td></tr>
+        <tr><td>They side with Sundial and stop transmitting</td><td>Take it seriously — it's a legitimate reading of the theme. Act Two becomes about whether a safe two hundred can stay safe, and the FEDRA column still arrives.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Where this goes <span>The rest of the year</span></h2>
+  <div class="acts">
+    <div class="act"><div class="n">Act One &middot; 01&ndash;05</div><div class="t"><b>The Sundial Arc</b><span>One relay lit, one settlement found. Establishes that transmitting has a price. Ends with the party's reputation fixed across three factions.</span></div></div>
+    <div class="act"><div class="n">Act Two &middot; 06&ndash;14</div><div class="t"><b>The Chain</b><span>Four more relays, roughly two sessions each, each a different environment — a flooded metro, a mountain repeater in winter, a hospital roof array, a drowned FM transmitter. The six years of unanswered call signs become the mission list. <b>Introduce Trauma here if session five didn't.</b></span></div></div>
+    <div class="act"><div class="n">Act Three &middot; 15&ndash;24</div><div class="t"><b>Who's Listening</b><span>The network is up and everyone can hear everyone — including FEDRA, including the Fireflies' own worst instincts. The question stops being "can we connect people" and becomes "should we have." Year one ends on what the chain is used for.</span></div></div>
+  </div>
+</section>
+
+<footer>
+  Act One scope &middot; Look for the Light &middot; The Last of Us TTRPG &middot; 5 players, standard rules
+</footer>
+
+</div>
+</body>
+</html>

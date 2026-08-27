@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E5E7E3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121618" media="(prefers-color-scheme: dark)">
+<meta name="description" content="GM session kit for the Look for the Light campaign — The Last of Us TTRPG.">
+<title>Look for the Light &mdash; GM Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#E5E7E3; --surface:#F4F4F2; --sunk:#DBDDD8; --rule:#C4C7C1; --rule2:#9EA4A0;
+  --ink:#171A1C; --ink2:#4C5457; --ink3:#787F83;
+  --amber:#A85D0A; --amber-soft:#F2E3C9; --amber-line:#D89B33;
+  --rust:#95311F; --rust-soft:#F2DCD6;
+  --signal:#265F75; --signal-soft:#D8E6EC;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+    --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+    --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+    --rust:#D4735D; --rust-soft:#301B17;
+    --signal:#6FB4CD; --signal-soft:#152730;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+  --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+  --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+  --rust:#D4735D; --rust-soft:#301B17;
+  --signal:#6FB4CD; --signal-soft:#152730;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); margin:0;
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased}
+.page{max-width:860px; margin:0 auto; padding:32px 22px 64px}
+
+.mast{border-top:6px solid var(--ink); padding-top:16px; margin-bottom:12px}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:8px}
+h1{font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:800;
+  font-size:clamp(48px,13vw,88px); line-height:.84; letter-spacing:.005em;
+  text-transform:uppercase; margin:0 0 14px; text-wrap:balance}
+h1 em{font-style:normal; color:var(--amber)}
+.sub{font-size:16.5px; color:var(--ink2); margin:0 0 26px; max-width:52ch}
+
+.cards{display:grid; gap:14px; margin-bottom:40px}
+a.card{display:block; text-decoration:none; color:inherit; background:var(--surface);
+  border:1px solid var(--rule); border-left:6px solid var(--amber-line);
+  padding:20px 22px; transition:background .12s ease, transform .12s ease}
+a.card:hover{background:var(--sunk)}
+a.card:active{transform:translateY(1px)}
+a.card:focus-visible{outline:3px solid var(--amber); outline-offset:2px}
+a.card.c-sess{border-left-color:var(--rust)}
+a.card.c-arc{border-left-color:var(--signal)}
+.card .kicker{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--amber); font-weight:600; display:block; margin-bottom:7px}
+.c-sess .kicker{color:var(--rust)} .c-arc .kicker{color:var(--signal)}
+.card h2{font-family:"Big Shoulders Display",sans-serif; font-size:36px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.02em; margin:0 0 6px; line-height:.98}
+.card p{margin:0; font-size:15px; color:var(--ink2); max-width:52ch}
+.card .go{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink3); margin-top:12px; display:block}
+
+h3{font-family:"Big Shoulders Display",sans-serif; font-size:26px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.02em; margin:0 0 12px;
+  padding-bottom:7px; border-bottom:2px solid var(--ink)}
+.track{display:grid; gap:10px; margin-bottom:36px}
+.trow{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:baseline;
+  background:var(--surface); border:1px solid var(--rule); padding:12px 16px}
+.trow .k{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--amber); font-weight:600; white-space:nowrap}
+.trow .v{font-size:14.5px; color:var(--ink2)}
+
+.note{background:var(--sunk); border-left:5px solid var(--rule2); padding:16px 20px;
+  font-size:14.5px; color:var(--ink2)}
+.note b{color:var(--ink); font-weight:600}
+.note p{margin:0 0 8px} .note p:last-child{margin:0}
+
+footer{border-top:1px solid var(--rule); margin-top:40px; padding-top:16px;
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em;
+  color:var(--ink3); text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="mast">
+  <div class="eyebrow">The Last of Us TTRPG &middot; GM Kit</div>
+  <h1>Look for<br>the <em>Light</em></h1>
+  <p class="sub">Everything for Friday night, in three pages. Standard rules, five players, Novice Survivor tier.</p>
+</header>
+
+<nav class="cards" aria-label="Session kit pages">
+  <a class="card" href="combat.html">
+    <span class="kicker">Reach for this first</span>
+    <h2>Endure and Survive</h2>
+    <p>Combat card. The turn loop, every DC and what rolls against it, stealth states, criticals, and what happens after a hit lands.</p>
+    <span class="go">Open &rarr;</span>
+  </a>
+  <a class="card c-sess" href="session-01.html">
+    <span class="kicker">Tonight</span>
+    <h2>KVLR 1490</h2>
+    <p>Session one. Ten scenes, three ways into the station, all read-aloud text, stat blocks and a pacing sheet.</p>
+    <span class="go">Open &rarr;</span>
+  </a>
+  <a class="card c-arc" href="act-one.html">
+    <span class="kicker">The long view</span>
+    <h2>The Sundial Arc</h2>
+    <p>Act One scope. Five sessions, the Pill curve, what rules to teach when, and which Fridays need real prep.</p>
+    <span class="go">Open &rarr;</span>
+  </a>
+</nav>
+
+<h3>Track these four</h3>
+<div class="track">
+  <div class="trow"><span class="k">Ashline</span><span class="v">Allied &middot; wary &middot; hostile &middot; destroyed</span></div>
+  <div class="trow"><span class="k">Sundial</span><span class="v">Unknown until session four</span></div>
+  <div class="trow"><span class="k">Bearings</span><span class="v">One per broadcast. Three and the lines cross.</span></div>
+  <div class="trow"><span class="k">Relays lit</span><span class="v">KVLR 1490 &mdash; and then?</span></div>
+</div>
+
+<div class="note">
+  <p><b>At the table.</b> These pages work offline once loaded, but the typefaces are pulled from Google Fonts — with no signal they fall back to your tablet's system fonts and everything still reads fine.</p>
+  <p><b>Print or save as PDF</b> from your browser's share menu if you'd rather have the combat card on paper. It's laid out for it.</p>
+</div>
+
+<footer>
+  Look for the Light &middot; Session kit &middot; standard rules
+</footer>
+
+</div>
+</body>
+</html>
