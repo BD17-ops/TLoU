@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E5E7E3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121618" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Dead Air — The Last of Us TTRPG session kit.">
+<title>Dead Air</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#E5E7E3; --surface:#F4F4F2; --sunk:#DBDDD8; --rule:#C4C7C1; --rule2:#9EA4A0;
+  --ink:#171A1C; --ink2:#4C5457; --ink3:#787F83;
+  --amber:#A85D0A; --amber-soft:#F2E3C9; --amber-line:#D89B33;
+  --rust:#95311F; --rust-soft:#F2DCD6;
+  --signal:#265F75; --signal-soft:#D8E6EC;
+  --node:#FBFBFA; --paper:#EFEBDF; --ink-blue:#2B3E63;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+    --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+    --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+    --rust:#D4735D; --rust-soft:#301B17;
+    --signal:#6FB4CD; --signal-soft:#152730;
+    --node:#1E2427; --paper:#22201A; --ink-blue:#8FA6D0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121618; --surface:#1A1F22; --sunk:#232A2D; --rule:#2F3639; --rule2:#485154;
+  --ink:#E5E7E4; --ink2:#A2AAAD; --ink3:#767E82;
+  --amber:#E2A340; --amber-soft:#2E2517; --amber-line:#8A6320;
+  --rust:#D4735D; --rust-soft:#301B17;
+  --signal:#6FB4CD; --signal-soft:#152730;
+  --node:#1E2427; --paper:#22201A; --ink-blue:#8FA6D0;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); margin:0;
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.52; -webkit-font-smoothing:antialiased}
+.page{max-width:1220px; margin:0 auto; padding:40px 28px 80px}
+
+.mast{border-top:6px solid var(--ink); padding-top:16px; margin-bottom:22px}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--amber); font-weight:600; margin-bottom:8px}
+.mast h1{font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:800;
+  font-size:clamp(46px,8.5vw,100px); line-height:.84; letter-spacing:.005em;
+  text-transform:uppercase; margin:0 0 16px; text-wrap:balance}
+.mast h1 em{font-style:normal; color:var(--amber)}
+.standfirst{font-size:17.5px; color:var(--ink2); max-width:64ch; margin:0}
+.standfirst b{color:var(--ink); font-weight:600}
+.stripbar{display:flex; flex-wrap:wrap; border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule); margin:24px 0 40px}
+.stripbar div{padding:12px 22px 12px 0; margin-right:22px; border-right:1px solid var(--rule);
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink3)}
+.stripbar div:last-child{border-right:none; margin-right:0}
+.stripbar b{display:block; color:var(--ink); font-size:13px; letter-spacing:.04em;
+  margin-top:3px; font-weight:600}
+
+h2{font-family:"Big Shoulders Display",Impact,sans-serif; font-weight:700;
+  font-size:32px; line-height:1; letter-spacing:.02em; text-transform:uppercase;
+  margin:0 0 16px; padding-bottom:8px; border-bottom:2px solid var(--ink);
+  display:flex; align-items:baseline; gap:14px}
+h2 span{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+  letter-spacing:.12em; color:var(--amber); margin-left:auto; white-space:nowrap}
+p{margin:0 0 11px; max-width:68ch}
+section{margin-bottom:48px}
+.dim{color:var(--ink2)} .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* state block */
+.state{background:var(--rust-soft); border:1px solid var(--rust); border-left-width:6px;
+  padding:22px 26px; margin-bottom:40px}
+.state h3{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--rust); margin:0 0 14px; font-weight:600}
+.state ul{margin:0; padding-left:18px; font-size:15px}
+.state li{margin-bottom:7px}
+.state li b{font-weight:600}
+
+/* read aloud */
+.readaloud{background:var(--sunk); border-left:6px solid var(--amber-line);
+  padding:24px 28px; margin:0 0 22px}
+.readaloud p{font-size:17.5px; line-height:1.6; max-width:60ch; margin:0 0 13px}
+.readaloud p:last-child{margin:0}
+.readaloud .beat{font-family:"Big Shoulders Display",sans-serif; font-size:26px;
+  font-weight:700; text-transform:uppercase; letter-spacing:.02em; color:var(--rust); line-height:1.06}
+
+/* beats */
+.beats{display:grid; gap:18px}
+.beat-c{display:grid; grid-template-columns:132px minmax(0,1fr); background:var(--surface);
+  border:1px solid var(--rule); border-left:5px solid var(--rule2)}
+@media (max-width:720px){.beat-c{grid-template-columns:1fr}}
+.beat-c.b-fight{border-left-color:var(--rust)}
+.beat-c.b-talk{border-left-color:var(--signal)}
+.beat-c.b-puzzle{border-left-color:var(--amber-line)}
+.beat-c .rail{padding:18px 14px; background:var(--sunk); border-right:1px solid var(--rule)}
+@media (max-width:720px){.beat-c .rail{border-right:none; border-bottom:1px solid var(--rule);
+  display:flex; gap:18px; align-items:baseline}}
+.rail .clock{font-family:"IBM Plex Mono",monospace; font-size:17px; font-weight:600;
+  color:var(--amber); display:block; margin-bottom:6px}
+.rail .mins{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink3)}
+.beat-c .body{padding:18px 24px 22px}
+.beat-c .head{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:8px}
+.beat-c h3{font-family:"Big Shoulders Display",sans-serif; font-size:31px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.02em; margin:0; line-height:1}
+.tag{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:600; padding:4px 9px; white-space:nowrap}
+.b-fight .tag{background:var(--rust-soft); color:var(--rust)}
+.b-talk .tag{background:var(--signal-soft); color:var(--signal)}
+.b-puzzle .tag{background:var(--amber-soft); color:var(--amber)}
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; margin-top:14px}
+.cols h4{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink2); margin:0 0 7px; font-weight:600;
+  padding-bottom:5px; border-bottom:1px solid var(--rule)}
+.cols ul{margin:0; padding-left:15px; font-size:13.5px; color:var(--ink2)}
+.cols li{margin-bottom:5px}
+.cols li b{color:var(--ink); font-weight:600}
+.cols p{font-size:13.5px; color:var(--ink2); margin:0 0 8px; max-width:none}
+.cols p:last-child{margin:0}
+.gmnote{background:var(--amber-soft); border-left:4px solid var(--amber-line);
+  padding:12px 16px; font-size:13.5px; margin-top:12px}
+.gmnote b{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--amber); display:block; margin-bottom:4px}
+.gmnote p{margin:0 0 7px; max-width:none; color:var(--ink)}
+.gmnote p:last-child{margin:0}
+.quote{font-size:15.5px; line-height:1.55; color:var(--ink); border-left:3px solid var(--rule2);
+  padding-left:16px; margin:12px 0; font-style:italic; max-width:58ch}
+.quote.radio{font-family:"IBM Plex Mono",monospace; font-style:normal; font-size:14px;
+  letter-spacing:.03em; border-left-color:var(--rust); color:var(--rust); font-weight:500}
+
+/* note facsimile */
+.notewrap{display:grid; grid-template-columns:minmax(0,280px) minmax(0,1fr); gap:26px; align-items:start}
+@media (max-width:760px){.notewrap{grid-template-columns:1fr}}
+.facsimile{background:var(--paper); border:1px solid var(--rule2); padding:26px 28px;
+  font-family:"IBM Plex Mono",monospace; font-size:16px; line-height:2.1; color:var(--ink);
+  box-shadow:0 1px 0 var(--rule); transform:rotate(-.5deg)}
+.facsimile .fx{display:block}
+.facsimile .sm{font-size:13px; color:var(--ink2)}
+.facsimile s{text-decoration:line-through; text-decoration-thickness:2px; color:var(--ink2)}
+.facsimile .other{color:var(--ink-blue); font-size:14px; line-height:1.5; display:block; margin-top:18px}
+.facsimile hr{border:none; border-top:1px solid var(--rule); margin:14px 0}
+
+/* freq table */
+.tablewrap{overflow-x:auto}
+table.d{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums}
+table.d th{text-align:left; font-family:"IBM Plex Mono",monospace; font-size:10px;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink2); font-weight:600;
+  padding:0 16px 8px 0; border-bottom:2px solid var(--ink); white-space:nowrap}
+table.d td{padding:11px 16px 11px 0; border-bottom:1px solid var(--rule); vertical-align:top}
+table.d tr:last-child td{border-bottom:none}
+table.d td:first-child{font-weight:600; font-family:"IBM Plex Mono",monospace; white-space:nowrap}
+table.d .num{font-family:"IBM Plex Mono",monospace; white-space:nowrap}
+
+/* figure */
+.figwrap{overflow-x:auto; background:var(--surface); border:1px solid var(--rule); padding:26px 22px}
+figure{margin:0}
+figure svg{display:block; width:100%; min-width:880px; height:auto}
+figcaption{font-size:13.5px; color:var(--ink2); margin-top:14px; max-width:76ch}
+
+/* payment */
+.pay{display:grid; grid-template-columns:repeat(auto-fit,minmax(238px,1fr)); gap:14px}
+.paycard{background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--amber-line); padding:16px 18px}
+.paycard.no{border-top-color:var(--rust)}
+.paycard h4{font-family:"Big Shoulders Display",sans-serif; font-size:21px; font-weight:700;
+  text-transform:uppercase; margin:0 0 7px; letter-spacing:.02em}
+.paycard .v{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+  color:var(--amber); display:block; margin-bottom:7px}
+.paycard.no .v{color:var(--rust)}
+.paycard p{font-size:13.5px; color:var(--ink2); margin:0; max-width:none}
+
+/* setting */
+.setting{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+.scard{background:var(--surface); border:1px solid var(--rule); border-left:4px solid var(--signal); padding:16px 18px}
+.scard h4{font-family:"Big Shoulders Display",sans-serif; font-size:21px; font-weight:700;
+  text-transform:uppercase; margin:0 0 6px; letter-spacing:.02em}
+.scard .geo{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--signal); display:block; margin-bottom:8px}
+.scard p{font-size:13.5px; color:var(--ink2); margin:0 0 7px; max-width:none}
+.scard p:last-child{margin:0}
+
+.check{columns:2; column-gap:34px; list-style:none; margin:0; padding:0; font-size:14.5px}
+@media (max-width:680px){.check{columns:1}}
+.check li{break-inside:avoid; padding:8px 0 8px 28px; position:relative; color:var(--ink2)}
+.check li::before{content:""; position:absolute; left:0; top:12px; width:14px; height:14px;
+  border:1.5px solid var(--rule2)}
+.check li b{color:var(--ink); font-weight:600}
+
+footer{border-top:1px solid var(--rule); margin-top:52px; padding-top:18px;
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em;
+  color:var(--ink3); text-transform:uppercase}
+
+/* --- site nav (added for tablet use) --- */
+.sitenav{position:sticky; top:0; z-index:50; display:flex; flex-wrap:wrap; gap:0;
+  background:var(--sunk); border-bottom:1px solid var(--rule2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px;
+  letter-spacing:.13em; text-transform:uppercase;
+  -webkit-backdrop-filter:saturate(180%) blur(6px); backdrop-filter:saturate(180%) blur(6px)}
+.sitenav a{display:block; padding:13px 18px; color:var(--ink2); text-decoration:none;
+  border-right:1px solid var(--rule); min-height:44px; line-height:20px}
+.sitenav a:hover{color:var(--ink); background:var(--surface)}
+.sitenav a:focus-visible{outline:2px solid var(--amber); outline-offset:-2px}
+.sitenav a[aria-current="page"]{color:var(--amber); font-weight:600; background:var(--bg);
+  box-shadow:inset 0 -3px 0 var(--amber)}
+@media print{
+  .sitenav{display:none}
+  figure svg{min-width:0 !important}
+  .figwrap{overflow:visible; border:none; padding:0}
+  .sesh,.node,.pace,.act,.trow,.mod,.fcard,.link,.branch,.crits,.teach>div,.loop>div{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  a{text-decoration:none; color:inherit}
+}
+</style>
+</head>
+<body>
+<nav class="sitenav" aria-label="Session kit">
+<a href="index.html">Kit</a>
+<a href="combat.html">Combat</a>
+<a href="session-01.html">S01</a>
+<a href="session-02.html" aria-current="page">S02</a>
+<a href="act-one.html">Act One</a>
+</nav>
+<div class="page">
+
+<header class="mast">
+  <div class="eyebrow">Session Two &middot; Look for the Light &middot; Nestucca Ridge, Oregon</div>
+  <h1>Dead<br><em>Air</em></h1>
+  <p class="standfirst">They finish the job, find out what KVLR actually was, and learn that the man they killed in the loading bay is going to be missed by twenty people with rifles. <b>Nobody gets to leave the ridge the way they came in.</b></p>
+</header>
+
+<div class="stripbar">
+  <div>Picks up<b>Mid-combat, loading bay</b></div>
+  <div>Runtime<b>2.5 hours &middot; 6 beats</b></div>
+  <div>Party<b>5 &middot; bruised, standing</b></div>
+  <div>They have<b>Fuel &middot; cable spliced &middot; the code</b></div>
+  <div>They lack<b>Any idea what they've done</b></div>
+</div>
+
+<div class="state">
+  <h3>Where session one stopped &mdash; exact state</h3>
+  <ul>
+    <li><b>Tactical:</b> loading bay. Two Ashline pushing in from the service corridor. The Clicker is at the roll-up door, which is <b>coming down</b>. A PC threw gravel to scramble its echolocation and it is currently chasing the sound.</li>
+    <li><b>Objective:</b> roof done — antenna feed spliced, Ellis's note recovered. Two full jerry cans in hand. <b>Only the transmitter room is left, and they have the code.</b></li>
+    <li><b>Boone: not met.</b> The booth is still an unopened door. Everything that scene was going to be is still available — and it's now a different scene entirely.</li>
+    <li><b>The body:</b> the man in the loading bay was <b>FEDRA</b>, collecting an ammunition consignment from the Ashline. The party knows. That knowledge is the engine of this whole session.</li>
+  </ul>
+</div>
+
+<section>
+  <h2>Cold open <span>Pick up on the throw</span></h2>
+  <div class="readaloud">
+    <p>The gravel goes out in a spray and lands somewhere behind the pallet racks, and the sound it makes is a small, cheap, brilliant lie.</p>
+    <p>The Clicker's head snaps ninety degrees away from you. It shrieks at the rack — at nothing — and goes for it, arms wide.</p>
+    <p>Behind you the roll-up door is still coming down. Four feet. Three and a half.</p>
+    <p>And in the corridor, boots. Two of them, moving fast, and a voice shouting a name that isn't any of yours.</p>
+    <p class="beat">Everyone gets one thing. Go.</p>
+  </div>
+
+  <div class="gmnote">
+    <b>Rule the gravel throw properly &mdash; this is the most important thing you'll do all session</b>
+    <p>A player invented a tactic the book doesn't have. Reward it by making it real and repeatable, and the whole table starts inventing.</p>
+    <p><b>Sound bait (house rule).</b> Any character may spend their Action to throw a scavenged object. Roll <span class="mono">Aiming vs DC 7</span>. On a success the target Infected moves to the sound and loses its next action; every survivor gets <b>advantage on Elusive rolls against it for one round</b>. Against a Clicker, add: it cannot re-acquire until it has physically reached the noise. On a critical, it stays confused an extra round. On a natural 1, it works out the throw came from you.</p>
+    <p>Announce this out loud as "the thing Dave did last session, it's a move now." Name it after the player.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The six beats <span>2.5 hours</span></h2>
+  <div class="beats">
+
+  <article class="beat-c b-fight">
+    <div class="rail"><span class="clock">0:00</span><span class="mins">25 min</span></div>
+    <div class="body">
+      <div class="head"><h3>The Door</h3><span class="tag">Combat &middot; timed</span></div>
+      <p>Three rounds until the roll-up door closes. Everything depends on which side of it people end up on.</p>
+      <div class="cols">
+        <div><h4>The clock</h4><ul>
+          <li><b>Round 1</b> — door at 3½ ft. Crawlable at a cost (Elusive DC 6, prone on the far side).</li>
+          <li><b>Round 2</b> — 2 ft. Elusive DC 9 to roll under.</li>
+          <li><b>Round 3</b> — shut. <b>Maintenance DC 10</b> at the chain hoist jams it open at any point.</li>
+        </ul></div>
+        <div><h4>Enemies</h4><ul>
+          <li><b>Clicker</b> — 35–50 HP, 3D12, Sneak DC 10. Currently baited. It fights whatever it reaches first, Ashline included.</li>
+          <li><b>2 &times; Ashline</b> — Ruffian (bat, 1D10, 15 HP) and Robber (pipe, 2D10, 25 HP, Counter DC 8). They came for the gunshot, not for the party.</li>
+        </ul></div>
+        <div><h4>The good ending</h4>
+          <p>Clicker outside, party inside, door shut. Let them buy it with a Maintenance roll or a clever throw rather than a fight — and let the two Ashline realise, mid-swing, that they are now locked in a room with five armed strangers and no Clicker to blame it on.</p>
+          <p><b>Those two can surrender.</b> If anyone offers, take it. It's the fastest road to Boone.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="beat-c b-talk">
+    <div class="rail"><span class="clock">0:25</span><span class="mins">30 min</span></div>
+    <div class="body">
+      <div class="head"><h3>Boone, and the Body</h3><span class="tag">Social &middot; the pivot</span></div>
+      <p>Boone comes down because of the gunfire. He gets three steps into the loading bay, sees the dead man on the concrete, and stops.</p>
+      <div class="quote">"...Oh, you stupid, stupid people. Do you know what that is? No. No, you don't, or you'd be a lot quieter."</div>
+      <p>This is no longer a negotiation over territory. <b>The party killed the reason the Ashline are still alive.</b> Staff Sergeant Danny Ocampo drove up here every six weeks to collect brass and look the other way. When he doesn't come back, FEDRA sends twenty men who don't.</p>
+      <div class="cols">
+        <div><h4>What Boone needs</h4><ul>
+          <li>The body <b>gone or explained</b></li>
+          <li>His people off this ridge inside a day</li>
+          <li>Someone else to be holding the bag</li>
+        </ul>
+        <p>He is frightened, and frightened is the most cooperative he will ever be. Play him fast and clipped, not menacing.</p></div>
+        <div><h4>What the party can offer</h4><ul>
+          <li><b>Stage it as Infected.</b> Medicine DC 11 to make the wounds read right. Fails badly if anyone shot him.</li>
+          <li><b>Carry him out</b> and dump him a valley away. Costs an hour they may not have.</li>
+          <li><b>Burn the station.</b> Ends the campaign objective. Let them consider it anyway.</li>
+          <li><b>Take the blame</b> — walk away and let the Ashline point at strangers. Cheap now, expensive later.</li>
+        </ul></div>
+        <div><h4>What they actually want from him</h4>
+          <p>They already have the transmitter code, so the key is worthless. What Boone has that nothing else does is <b>two years of sitting on this ridge with a radio.</b></p>
+          <p>He has heard <b>1020</b>. Once, about a year ago, a man's voice reading what sounded like a shipping forecast. He assumed it was nothing. Ask him and he'll tell you which way the antenna was pointed.</p>
+          <div class="gmnote"><b>If they killed Boone in the fight</b><p>Then his second, <b>Marisol</b>, does this scene instead — angrier, less useful, and she wants the party gone rather than helping. She still knows about 1020, but they'll have to trade for it.</p></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="beat-c b-puzzle">
+    <div class="rail"><span class="clock">0:55</span><span class="mins">20 min</span></div>
+    <div class="body">
+      <div class="head"><h3>Four Nine One One</h3><span class="tag">Puzzle &middot; fast</span></div>
+      <p>They have everything. Let this be quick and competent — the reward for good play last session is that this part just <em>works</em>.</p>
+      <div class="cols">
+        <div><h4>The sequence</h4><ul>
+          <li>Code on the keypad. The door has a <b>pressure seal</b> — it sighs when it opens. That's not a radio station door.</li>
+          <li>Two cans into the generator. <b>Maintenance DC 10</b> for the seized starter.</li>
+          <li>Spliced feed connects at the rack.</li>
+        </ul></div>
+        <div><h4>What they see before they throw the switch</h4>
+          <p>Behind a plywood panel bearing a sun-faded placard — <span class="mono">KVLR · SERVING THE NORTH COAST SINCE 1961</span> — the equipment rack is <b>olive drab</b>. Property tags. A combination lock cast into the frame. A stencil across the top of the rack:</p>
+          <p class="mono" style="font-size:15px;color:var(--rust);font-weight:600">DESTROY BEFORE ABANDONMENT</p>
+          <p><b>Instinct or Maintenance DC 8:</b> this gear was never commercial. It's twenty years older than it should be and built to a military spec.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="beat-c b-puzzle">
+    <div class="rail"><span class="clock">1:15</span><span class="mins">25 min</span></div>
+    <div class="body">
+      <div class="head"><h3>The Numbers</h3><span class="tag">Reveal &middot; the centrepiece</span></div>
+      <p>They throw the switch expecting to talk. <b>The station talks first.</b></p>
+      <div class="readaloud" style="margin:14px 0">
+        <p>The generator catches. The rack lights come up one bank at a time, orange, and somewhere inside it a reel begins to turn — not because anyone told it to, but because it has been waiting eleven years for power and it knows exactly what it is for.</p>
+        <p>A woman's voice comes out of the monitor speaker. Recorded. Flat. Unhurried. American.</p>
+        <p class="mono" style="font-size:16px;color:var(--rust);font-weight:600;font-family:'IBM Plex Mono',monospace">"Nine. Four. Seven. Two. One.<br>Nine. Four. Seven. Two. One.<br>Message follows. Message follows."</p>
+        <p>And then five-digit groups, and then more of them, in a voice that has not aged and does not care that everyone who was supposed to be listening is dead.</p>
+      </div>
+      <div class="cols">
+        <div><h4>What KVLR was</h4>
+          <p><b>A numbers station.</b> A licensed low-power AM broadcaster that played country records to the North Coast, and whose real job was to carry one-way encrypted traffic on a schedule. The music was the cover. The tower, the power, the road and the staff were the point.</p>
+          <p>The party did not turn on a radio station. <b>They reactivated a node.</b></p>
+        </div>
+        <div><h4>Why Sundial answers</h4>
+          <p>Because the stored routine transmitted a <b>valid authentication preamble</b> — and someone has been waiting six years for one. The party didn't find Sundial.</p>
+          <p><b>They said the password by accident.</b></p>
+        </div>
+        <div><h4>Sundial, on 1490</h4>
+          <p class="quote radio">"UNIDENTIFIED STATION ON ONE FOUR NINE ZERO. THIS IS SUNDIAL ACTUAL. YOUR AUTHENTICATION IS ELEVEN YEARS EXPIRED. IDENTIFY BY NAME, RANK AND UNIT. YOU HAVE SIXTY SECONDS."</p>
+          <p>Let the sixty seconds be real. Count them at the table.</p>
+          <p>Then, after the silence — same voice, but the procedure has gone out of it:</p>
+          <p class="quote radio">"...There isn't anybody left who knows the response. Is there."</p>
+          <div class="gmnote"><b>Then Wren breaks in</b><p>Frantic, on the same frequency, from three ridges away — because she has been listening on a receiver and she just heard all of it. She tells them to get off the air and get to her. <b>She sounds afraid of the wrong thing,</b> and a sharp player will notice.</p></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="beat-c b-fight">
+    <div class="rail"><span class="clock">1:40</span><span class="mins">25 min</span></div>
+    <div class="body">
+      <div class="head"><h3>Off the Ridge</h3><span class="tag">Pressure &middot; not a fight</span></div>
+      <p>Ocampo's radio check-in was due an hour ago. Headlights come up the ridge road — two vehicles, unhurried, which is worse than fast.</p>
+      <div class="cols">
+        <div><h4>The clock</h4><ul>
+          <li>They cannot take the gate. It's locked and it's where the road is.</li>
+          <li><b>Boone's bolt-hole</b> — cut fence behind the dumpsters, if the body scene went well</li>
+          <li><b>The roof plank</b> to the maintenance shed — Elusive DC 9</li>
+          <li><b>The culvert</b> under the lot, Survival DC 8, comes out in the creek draw</li>
+        </ul></div>
+        <div><h4>The hard question</h4>
+          <p><b>Do they shut the transmitter off?</b></p>
+          <p>Leaving it running means the chain stays lit and Wren gets her bearing — and it means FEDRA drives up to a station that is loudly, obviously live, with Ashline in it.</p>
+          <p>Don't push them either way. Note what they choose. It decides who FEDRA hangs this on.</p>
+        </div>
+        <div><h4>What they should see leaving</h4>
+          <p>From the culvert or the shed roof, looking back: the tower, and one red lamp near the top that has not been lit since before some of them were born.</p>
+          <p>It is genuinely beautiful and it is a target.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="beat-c b-talk">
+    <div class="rail"><span class="clock">2:05</span><span class="mins">25 min</span></div>
+    <div class="body">
+      <div class="head"><h3>The Plantation</h3><span class="tag">Fireflies &middot; payment</span></div>
+      <p>Nine miles down the Nestucca drainage, in a stand of trees that has no business existing, the Firefly cell keeps a camp of eight people in a collapsed Forest Service guard station.</p>
+      <div class="cols">
+        <div><h4>Who's there</h4><ul>
+          <li><b>Wren</b> — courier. Freelancing, and about to be found out.</li>
+          <li><b>Hollis</b> — cell lead, fifties, tired, did not authorise any of this and is going to say so.</li>
+          <li><b>Nadia</b> — quartermaster and mechanic. Runs the bench. Warm, entirely transactional, the only one glad to see them.</li>
+        </ul></div>
+        <div><h4>The confrontation</h4>
+          <p>They are carrying <b>Ellis Vane's</b> notebook. Wren recognises the handwriting from across the room.</p>
+          <p>She sent Ellis. He stopped answering eleven months ago. She never told anyone, because Hollis would have closed the file — and then she sent five strangers up the same road without mentioning him.</p>
+          <p>Her defence is thin and true: <em>she didn't know he was dead, only that he was gone.</em> Let her be bad at this.</p>
+        </div>
+        <div><h4>Ends on</h4>
+          <p>Nadia's set has been on 1490 since dark. Late in the scene it wakes up.</p>
+          <p class="quote radio">"STATION ON ONE FOUR NINE ZERO. WE HAVE YOUR BEARING. REMAIN AT YOUR POST."</p>
+          <p>The party is not at their post. <b>But KVLR is still transmitting, and Boone is still in it.</b></p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  </div>
+</section>
+
+<section>
+  <h2>Ellis's note <span>Now a mission list</span></h2>
+  <div class="notewrap">
+    <div class="facsimile">
+      <span class="fx">532</span>
+      <span class="fx sm">Dark</span>
+      <hr>
+      <span class="fx">1020</span>
+      <span class="fx sm">???? &mdash; 1 Broadcast</span>
+      <hr>
+      <span class="fx"><s>14XX</s></span>
+      <span class="fx">1452?</span>
+      <span class="fx sm">&ndash; No Answer</span>
+      <hr>
+      <span class="fx">1490</span>
+      <span class="fx sm">DC 4-9-1-1</span>
+      <span class="other">They let me get this far</span>
+    </div>
+    <div>
+      <p>Four numbers on a water-damaged page. Between Boone's two years of listening and Nadia's radio knowledge, the party can now work out that <b>only one of these is an ordinary radio station</b> — and it isn't the one they just switched on.</p>
+      <div class="tablewrap">
+      <table class="d">
+        <thead><tr><th>Freq</th><th>Ellis wrote</th><th>What it actually is</th></tr></thead>
+        <tbody>
+          <tr><td>532 kHz</td><td>Dark</td><td><b>Below the broadcast band entirely.</b> Nothing licensed lives here — it's maritime and military territory. "Dark" because whoever holds it <em>only ever listens</em>. This is Sundial's control frequency.</td></tr>
+          <tr><td>1020 kHz</td><td>???? — 1 Broadcast</td><td>An ordinary clear-channel frequency. Ellis heard <b>exactly one transmission</b> and couldn't identify it. Boone heard it too, about a year ago — a man reading something like a shipping forecast. <b>This is the next objective.</b></td></tr>
+          <tr><td>1452 kHz</td><td><s>14XX</s> — No Answer</td><td>Not a valid North American channel. The band runs on <b>10 kHz spacing</b> — 1450 and 1460 exist, 1452 does not. It's a <em>European</em> allocation. Ellis crossed out his first guess because he knew the number was wrong and wrote it down anyway.</td></tr>
+          <tr><td>1490 kHz</td><td>DC 4-9-1-1</td><td>KVLR. One of only <b>six shared "graveyard" local channels</b> in the United States, crowded with hundreds of tiny low-power stations. The best place to hide a transmitter is in a crowd of identical ones.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="gmnote"><b>Nadia's line, if a player pushes on 1452</b>
+        <p>"There's nothing at fourteen fifty-two. Not on this continent — we don't cut the band that way. Whatever your friend was hearing, it wasn't licensed here. It wasn't licensed anywhere near here."</p>
+        <p>Then move on. Do not explain it this year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The band <span>Why these four numbers matter</span></h2>
+  <div class="figwrap">
+  <figure>
+    <svg viewBox="0 0 1100 372" role="img" aria-label="A diagram of the medium wave band from 500 to 1700 kilohertz. The North American AM broadcast band runs from 540 to 1700 kilohertz with ten kilohertz spacing. Six graveyard local channels are marked at 1230, 1240, 1340, 1400, 1450 and 1490. Ellis's frequency 532 falls below the band entirely in maritime and military territory. 1020 is an ordinary channel inside the band. 1452 falls between the valid channels 1450 and 1460 and is not a North American allocation. 1490 is one of the six graveyard channels.">
+      <defs>
+        <marker id="n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--rule2,#9EA4A0)"></path>
+        </marker>
+      </defs>
+
+      <!-- up callouts -->
+      <text x="496" y="64" text-anchor="middle" font-family="Big Shoulders Display, sans-serif" font-size="25" font-weight="700" fill="var(--signal,#265F75)">1020 &mdash; ONE BROADCAST</text>
+      <text x="496" y="88" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">Somebody transmitted here. Once.</text>
+      <path d="M496,104 V164" fill="none" stroke="var(--signal,#265F75)" stroke-width="1.6" marker-end="url(#n)"></path>
+
+      <text x="1040" y="64" text-anchor="end" font-family="Big Shoulders Display, sans-serif" font-size="25" font-weight="700" fill="var(--amber,#A85D0A)">1490 &mdash; KVLR</text>
+      <text x="1040" y="88" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">Hidden in a crowd of identical stations.</text>
+      <path d="M920,104 H872 V164" fill="none" stroke="var(--amber,#A85D0A)" stroke-width="1.6" marker-end="url(#n)"></path>
+
+      <!-- scale ends -->
+      <text x="80" y="160" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink3,#787F83)">500</text>
+      <text x="1040" y="160" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink3,#787F83)">1700 kHz</text>
+
+      <!-- below-band region + band -->
+      <rect x="80" y="170" width="32" height="38" fill="var(--rust-soft,#F2DCD6)" stroke="var(--rust,#95311F)" stroke-width="1.3"></rect>
+      <rect x="112" y="170" width="928" height="38" fill="var(--sunk,#DBDDD8)" stroke="var(--rule2,#9EA4A0)" stroke-width="1.5"></rect>
+      <text x="384" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5"
+            letter-spacing="1.4" fill="var(--ink2,#4C5457)" font-weight="600">NORTH AMERICAN AM BROADCAST BAND &middot; 540&ndash;1700 kHz</text>
+
+      <!-- graveyard ticks -->
+      <g stroke="var(--amber-line,#D89B33)" stroke-width="3">
+        <line x1="664" y1="170" x2="664" y2="208"></line>
+        <line x1="672" y1="170" x2="672" y2="208"></line>
+        <line x1="752" y1="170" x2="752" y2="208"></line>
+        <line x1="800" y1="170" x2="800" y2="208"></line>
+        <line x1="840" y1="170" x2="840" y2="208"></line>
+        <line x1="872" y1="170" x2="872" y2="208"></line>
+      </g>
+      <text x="646" y="238" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11"
+            letter-spacing="1.1" fill="var(--amber,#A85D0A)" font-weight="600">THE SIX GRAVEYARD CHANNELS</text>
+      <path d="M652,234 H666 V212" fill="none" stroke="var(--amber-line,#D89B33)" stroke-width="1.3"></path>
+
+      <!-- down callouts -->
+      <path d="M106,276 V214" fill="none" stroke="var(--rust,#95311F)" stroke-width="1.6" marker-end="url(#n)"></path>
+      <text x="80" y="306" font-family="Big Shoulders Display, sans-serif" font-size="25" font-weight="700" fill="var(--rust,#95311F)">532 &mdash; DARK</text>
+      <text x="80" y="328" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">Below the band. Not a station.</text>
+      <text x="80" y="346" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">Maritime and military.</text>
+
+      <path d="M918,276 H842 V214" fill="none" stroke="var(--rust,#95311F)" stroke-width="1.6" marker-end="url(#n)"></path>
+      <text x="1040" y="306" text-anchor="end" font-family="Big Shoulders Display, sans-serif" font-size="25" font-weight="700" fill="var(--rust,#95311F)">1452 &mdash; NO ANSWER</text>
+      <text x="1040" y="328" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">Falls between 1450 and 1460.</text>
+      <text x="1040" y="346" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--ink2,#4C5457)">Not a North American channel at all.</text>
+    </svg>
+    <figcaption>Three of Ellis's four numbers are wrong in an interesting way. 532 sits below the broadcast band, 1452 falls in a gap that doesn't exist on this continent, and 1490 is deliberately buried in the most crowded channel in American radio. Only 1020 is an ordinary frequency — which is why it's the one worth driving to.</figcaption>
+  </figure>
+  </div>
+</section>
+
+<section>
+  <h2>What Wren pays them <span>And what she can't</span></h2>
+  <p>She is paying out of a cell store she has no authority over, for a job nobody sanctioned, partly as wages and partly as guilt. <b>Hollis finds out during the scene.</b></p>
+  <div class="pay">
+    <div class="paycard">
+      <span class="v">30 Pills each</span>
+      <h4>Medical stores</h4>
+      <p>Enough, with the 20 from the session, to put everyone at the 50-pill mark. Life Tier 1 comes into reach next session exactly as planned.</p>
+    </div>
+    <div class="paycard">
+      <span class="v">1 crafted kit each</span>
+      <h4>First Aid</h4>
+      <p>The single most valuable thing in the game — kits cannot be looted, only made. Nadia has five and hands over five, which Hollis notices.</p>
+    </div>
+    <div class="paycard">
+      <span class="v">Tool Level 2</span>
+      <h4>Nadia's bench</h4>
+      <p><b>The real payment.</b> Access to a working workbench unlocks the next tier of weapon upgrades and gives the party a place worth coming back to. Costs Wren nothing and changes everything.</p>
+    </div>
+    <div class="paycard">
+      <span class="v">A box of brass</span>
+      <h4>Ammunition</h4>
+      <p>Whatever calibre they're short of, one box. Note the irony out loud if anyone's paying attention — they've just come from a building where this was money.</p>
+    </div>
+    <div class="paycard">
+      <span class="v">Beds, food, a roof</span>
+      <h4>The camp</h4>
+      <p>A base of operations, which the campaign has not had until now. Also somewhere that can be taken away from them later.</p>
+    </div>
+    <div class="paycard no">
+      <span class="v">Cannot pay</span>
+      <h4>Cover from FEDRA</h4>
+      <p>When they tell her about Ocampo she goes grey and stops talking. Eight people in a wooden building cannot absorb a manhunt, and everyone in the room works that out at the same moment.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Setting <span>Northern Oregon Coast Range</span></h2>
+  <p>One correction worth making, because your players may know: <b>coast redwoods stop at the Chetco River near Brookings</b>, four hundred miles south of Tillamook. Northern Oregon is Sitka spruce, Douglas fir and western hemlock — identical cathedral-and-fog atmosphere, different species. Here's how to keep the redwoods anyway.</p>
+  <div class="setting">
+    <div class="scard">
+      <span class="geo">The forest</span>
+      <h4>Coast Range old growth</h4>
+      <p>Sitka spruce and Douglas fir to 250 feet. Fog that never fully lifts, moss to the shoulder, sword fern, nurse logs with hemlocks growing out of them in a row.</p>
+      <p>Sound doesn't carry. Neither does line of sight. Both are mechanics.</p>
+    </div>
+    <div class="scard">
+      <span class="geo">The Plantation</span>
+      <h4>The redwoods you wanted</h4>
+      <p>A 1930s Forest Service <b>experimental redwood plantation</b> — coast redwoods planted four hundred miles out of range by men who assumed somebody would come back in a century to measure them.</p>
+      <p>Ninety-odd years on they are enormous, wrong, and utterly silent. The Firefly camp is inside it. It's real forestry practice, so it survives a player Googling it.</p>
+    </div>
+    <div class="scard">
+      <span class="geo">Nestucca Ridge</span>
+      <h4>KVLR 1490</h4>
+      <p>A brick building and a guyed tower above the Nestucca drainage, twenty minutes off Highway 101. Licensed 1961, played country records, carried something else.</p>
+    </div>
+    <div class="scard">
+      <span class="geo">Mount Hebo &middot; 3,154 ft</span>
+      <h4>Sundial</h4>
+      <p>A real Air Force radar station — the 689th Radar Squadron, 1956 to 1979, a SAGE air-defence node whose three 140-foot radomes were repeatedly destroyed by Pacific storms. The site was stripped and returned to nature in 1980.</p>
+      <p><b>Which is the point.</b> There is nothing on that summit. Everything that survived is underneath it.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What this changes upstream <span>Act One, revised</span></h2>
+  <div class="tablewrap">
+    <table class="d">
+      <thead><tr><th>Was</th><th>Now</th></tr></thead>
+      <tbody>
+        <tr><td>Sundial is a civilian settlement of 200 people</td><td><b>A military signals remnant</b> holding a chain of command with nobody above it. Their last valid order was to maintain the network and await authentication. The party just supplied one.</td></tr>
+        <tr><td>The relay chain is a Firefly comms network</td><td><b>It never was.</b> It's a Cold War numbers-station net that Sundial still considers theirs. Wren thinks she's rebuilding Firefly infrastructure; she's reactivating somebody else's weapon system.</td></tr>
+        <tr><td>The wall of unanswered names is a settlement's moral choice</td><td><b>A signals log.</b> Every civilian distress call received in six years, logged, and annotated <span class="mono">NON-ACTIONABLE</span>. Soldiers following procedure while people died on the radio. Colder, and much worse.</td></tr>
+        <tr><td>Session 2 was a siege of KVLR</td><td>The siege is gone — <b>the broadcast hadn't happened yet</b>, so there was nothing to besiege. Its pressure has been absorbed into the FEDRA manhunt, which is better because the party caused it personally.</td></tr>
+        <tr><td>FEDRA finds them by triangulation alone</td><td><b>Two tracks now.</b> The manhunt for Ocampo gives them a <em>reason</em> to search and moves fast; the bearings give them a <em>place</em> and move slowly. They converge in the finale.</td></tr>
+        <tr><td>Ivo is a settlement scout</td><td><b>Reconnaissance.</b> Sundial doesn't send a greeter, it sends an element to assess a compromised node.</td></tr>
+        <tr><td>Act One runs sessions 1–5</td><td><b>Sessions 1–6.</b> Everything slid one. Session 3 is the 1020 tower, 4 the road and the recon contact, 5 Mount Hebo, 6 the climax.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="gmnote" style="margin-top:18px">
+    <b>On the second tower you asked for</b>
+    <p>It doesn't fit. Beats one and two alone are an hour, and the Boone scene is now the best scene in the session because the dead FEDRA man turned it from a negotiation into a shared emergency. <b>Cutting Boone to reach 1020 would be trading your strongest material for a rushed dungeon.</b></p>
+    <p>Session two ends with the <em>bearing</em> to 1020 and a reason to hurry. Session three is the tower, and it gets a full build. If you'd rather have the tower this Friday, cut beat six — the Plantation — and open session three there instead.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Before Friday <span>Prep checklist</span></h2>
+  <ul class="check">
+    <li><b>Name the sound-bait rule after the player who invented it</b> and announce it in the first five minutes</li>
+    <li><b>Write Ocampo's name on a card</b> — plus the kid's drawing folded in his breast pocket, if you want it to hurt</li>
+    <li><b>Print Ellis's note</b> to hand over physically; the crossed-out 14XX matters</li>
+    <li><b>Read the numbers aloud yourself.</b> Flat, unhurried, no character voice. Practise it once.</li>
+    <li><b>Count the sixty seconds for real</b> when Sundial demands identification</li>
+    <li><b>Decide now:</b> does Boone survive the session, and does he stay on the ridge when FEDRA arrives?</li>
+    <li><b>Pre-roll</b> Clicker HP and the two Ashline</li>
+    <li><b>Have Hollis's objection ready</b> — he's right, and Wren has no answer</li>
+    <li><b>Do not explain 1452.</b> Not this year.</li>
+  </ul>
+</section>
+
+<footer>
+  Session 02 &middot; Dead Air &middot; Look for the Light &middot; standard rules + sound bait
+</footer>
+
+</div>
+</body>
+</html>
